@@ -1,18 +1,27 @@
-// import Input from './components/Input';
-
 import Input from './components/Input';
+import Task from './models/Task';
 
 export default function App() {
+    /**
+     * Add a new task to the list
+     * 
+     * @param title Task title
+     */
+    const addTask = (title: string) => {
+        const task = new Task(title);
+        console.log(task);
+    };
+
     return (
         <>
-            <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-16">
+            <div className="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden mt-16">
                 <div className="px-4 py-2">
                     <h1 className="text-gray-800 font-bold text-2xl uppercase">
                         To-Do List
                     </h1>
                 </div>
                 <form className="w-full max-w-sm mx-auto px-4 py-2">
-                    <Input value="" placeholder="Add a new task" />
+                    <Input placeholder="Add a new task" onClick={addTask}/>
                 </form>
                 <ul className="divide-y divide-gray-200 px-4">
                     <li className="py-4">
@@ -27,7 +36,7 @@ export default function App() {
                                 htmlFor="todo1"
                                 className="ml-3 block text-gray-900"
                             >
-                                <span className="text-lg font-medium">
+                                <span className="text-md font-normal">
                                     Finish project proposal
                                 </span>
                             </label>

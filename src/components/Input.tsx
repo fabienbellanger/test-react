@@ -1,13 +1,32 @@
 import { useState } from 'react';
 
 interface InputProps {
-    value: string;
     placeholder?: string;
-    // onClick: () => void;
+    onClick: (v: string) => void;
 }
 
-export default function Input({ value, placeholder }: InputProps) {
-    const [inputValue, setInputValue] = useState(value);
+export default function Input({ placeholder, onClick }: InputProps) {
+    const [inputValue, setInputValue] = useState('');
+
+    const buttonStyle = inputValue.trim() === ''
+        ? 'flex-shrink-0 bg-gray-400 border-gray-400 text-sm border-1 text-white py-1 px-2 rounded'
+        : 'flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-1 text-white py-1 px-2 rounded cursor-pointer'
+
+    const addTask = () => {
+        if (inputValue.trim() !== '') {
+            onClick(inputValue);
+            setInputValue('');
+        }
+    }
+
+    const validOnEnter = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            e.stopPropagation();
+
+            addTask();
+        }
+    }
 
     return (
         <div className="flex items-center border-b-2 border-teal-500 py-2">
@@ -17,11 +36,12 @@ export default function Input({ value, placeholder }: InputProps) {
                 placeholder={placeholder}
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={validOnEnter}
             />
             <button
-                className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded cursor-pointer"
+                className={buttonStyle}
                 type="button"
-                onClick={(e) => console.log(e)}
+                onClick={addTask}
             >
                 Add
             </button>
