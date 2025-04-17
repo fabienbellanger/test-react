@@ -29,22 +29,24 @@ export default function Input({ placeholder, onClick }: InputProps) {
     }
 
     return (
-        <div className="flex items-center border-b-2 border-teal-500 py-2">
-            <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                placeholder={placeholder}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={validOnEnter}
-            />
-            <button
-                className={buttonStyle}
-                type="button"
-                onClick={addTask}
-            >
-                Add
-            </button>
-        </div>
+        <form className="w-full max-w-sm mx-auto px-4 py-2">
+            <div className="flex items-center border-b-2 border-teal-500 py-2">
+                <input
+                    className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    type="text"
+                    placeholder={placeholder}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={validOnEnter}
+                />
+                <button
+                    className={buttonStyle}
+                    type="button"
+                    onClick={addTask}
+                >
+                    Add
+                </button>
+            </div>
+        </form>
     );
 }
