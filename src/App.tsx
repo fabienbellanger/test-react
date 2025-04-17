@@ -12,13 +12,12 @@ export default function App() {
      * @param title Task title
      */
     const addTask = (title: string) => {
-        const task = new Task(title);
-        setTasks(prevTasks => [...prevTasks, task]);
+        setTasks(prevTasks => [...prevTasks, new Task(title)]);
     };
 
     return (
         <div className="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden mt-16 pb-8">
-            <Header/>
+            <Header title="To-Do List"/>
 
             <Input placeholder="Add a new task" onClick={addTask}/>
             
@@ -27,11 +26,15 @@ export default function App() {
     );
 }
 
-function Header() {
+interface HeaderProps {
+    title: string
+}
+
+function Header({title}: HeaderProps) {
     return (
         <div className="px-12 py-2 pt-8">
             <h1 className="text-gray-800 font-bold text-2xl uppercase">
-                To-Do List
+                {title}
             </h1>
         </div>
     )
