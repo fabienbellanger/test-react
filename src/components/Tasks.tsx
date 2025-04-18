@@ -48,11 +48,6 @@ const TaskItem = memo(function TaskItem({
     onToggle,
     onDelete,
 }: TaskItemProps) {
-    const confirmDelete = (index: number) => {
-        if (window.confirm('Are you sure you want to delete this task?')) {
-            onDelete(index);
-        }
-    };
     return (
         <li className="py-2">
             <div className="flex items-center justify-between">
@@ -78,7 +73,7 @@ const TaskItem = memo(function TaskItem({
                     type="button"
                     className="p-2 text-red-500 hover:text-red-700 cursor-pointer"
                     aria-label="Delete task"
-                    onClick={() => confirmDelete(index)}
+                    onClick={() => onDelete(index)}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
