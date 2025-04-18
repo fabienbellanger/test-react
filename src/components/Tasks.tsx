@@ -57,11 +57,11 @@ const TaskItem = memo(function TaskItem({
                     type="checkbox"
                     checked={task.completed}
                     onChange={() => onToggle(index)}
-                    className="h-5 w-5 rounded"
+                    className="h-5 w-5 rounded cursor-pointer"
                 />
                 <label
                     htmlFor={`task_${index}`}
-                    className={`ml-3 block flex-1 ${
+                    className={`ml-3 block flex-1 cursor-pointer ${
                         task.completed
                             ? 'text-gray-400 line-through'
                             : 'text-gray-700'
@@ -71,7 +71,7 @@ const TaskItem = memo(function TaskItem({
                 </label>
                 <button
                     type="button"
-                    className="p-2 text-red-500 hover:text-red-700 cursor-pointer"
+                    className="p-1 text-red-500 hover:text-red-700 cursor-pointer hover:bg-red-200 rounded-full transition-colors duration-200"
                     aria-label="Delete task"
                     onClick={() => onDelete(index)}
                 >
