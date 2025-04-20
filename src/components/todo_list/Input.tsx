@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface InputProps {
     placeholder?: string;
@@ -7,6 +7,7 @@ interface InputProps {
 
 export default function Input({ placeholder, onClick }: InputProps) {
     const [inputValue, setInputValue] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const buttonStyle =
         inputValue.trim() === ''
@@ -22,6 +23,7 @@ export default function Input({ placeholder, onClick }: InputProps) {
             onClick(taskName);
 
             setInputValue('');
+            inputRef.current?.focus();
         }
     };
 
@@ -44,6 +46,8 @@ export default function Input({ placeholder, onClick }: InputProps) {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={validOnEnter}
+                    ref={inputRef}
+                    autoFocus
                 />
                 <button className={buttonStyle} type="button" onClick={addTask}>
                     Add

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Task from '../models/Task';
+import Task from '../../models/Task';
 
 interface TasksProps {
     tasks: Task[];
