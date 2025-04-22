@@ -61,7 +61,7 @@ const TaskItem = memo(function TaskItem({
                 />
                 <label
                     htmlFor={`task_${index}`}
-                    className={`ml-3 block flex-1 cursor-pointer ${
+                    className={`ml-3 block flex-1 text-ellipsis cursor-pointer ${
                         task.completed
                             ? 'text-gray-400 line-through'
                             : 'text-gray-700'

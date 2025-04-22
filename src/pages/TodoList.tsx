@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Input from './Input';
-import Tasks from './Tasks';
-import Task from '../../models/Task';
+import Input from '../components/todo_list/Input';
+import Tasks from '../components/todo_list/Tasks';
+import Task from '../models/Task';
 
 export default function TodoList() {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -39,9 +39,7 @@ function Header({ title, tasksNumber }: HeaderProps) {
                     {title}
                 </div>
                 {tasksNumber > 0 && (
-                    <span className="inline-flex items-center rounded-md bg-teal-200 px-2 py-1 ml-2 text-xs font-medium text-teal-700 ring-1 ring-teal-600/50 ring-inset">
-                        {tasksNumber}
-                    </span>
+                    <span className="todo-list_header">{tasksNumber}</span>
                 )}
             </h1>
         </div>

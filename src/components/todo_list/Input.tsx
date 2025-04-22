@@ -28,17 +28,23 @@ export default function Input({ placeholder, onClick }: InputProps) {
         }
     }, [inputValue, onClick]);
 
-    const validOnEnter = useCallback((e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            e.stopPropagation();
-            addTask();
-        }
-    }, [addTask]);
+    const validOnEnter = useCallback(
+        (e: React.KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                addTask();
+            }
+        },
+        [addTask]
+    );
 
-    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-    }, []);
+    const handleInputChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setInputValue(e.target.value);
+        },
+        []
+    );
 
     return (
         <form className="w-full max-w-sm mx-auto px-4 py-2">
