@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 interface InputProps {
     placeholder?: string;
@@ -9,12 +9,13 @@ export default function Input({ placeholder, onClick }: InputProps) {
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const buttonStyle =
-        inputValue.trim() === ''
+    const buttonStyle = useMemo(() => {
+        return inputValue.trim() === ''
             ? 'flex-shrink-0 bg-gray-400 border-gray-400 text-sm border-1 text-white py-1 px-2 rounded'
             : 'flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-1 text-white py-1 px-2 rounded cursor-pointer';
+    }, [inputValue]);
 
-    const addTask = () => {
+    const addTask = useCallback(() => {
         if (inputValue.trim() !== '') {
             // Capitalize the task name
             let taskName = inputValue.trim();
@@ -25,16 +26,19 @@ export default function Input({ placeholder, onClick }: InputProps) {
             setInputValue('');
             inputRef.current?.focus();
         }
-    };
+    }, [inputValue, onClick]);
 
-    const validOnEnter = (e: React.KeyboardEvent) => {
+    const validOnEnter = useCallback((e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
             e.preventDefault();
             e.stopPropagation();
-
             addTask();
         }
-    };
+    }, [addTask]);
+
+    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    }, []);
 
     return (
         <form className="w-full max-w-sm mx-auto px-4 py-2">
@@ -44,7 +48,7 @@ export default function Input({ placeholder, onClick }: InputProps) {
                     type="text"
                     placeholder={placeholder}
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    onChange={handleInputChange}
                     onKeyDown={validOnEnter}
                     ref={inputRef}
                     autoFocus
