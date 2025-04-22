@@ -71,7 +71,7 @@ const TaskItem = memo(function TaskItem({
                 </label>
                 <button
                     type="button"
-                    className="p-1 text-red-500 hover:text-red-700 cursor-pointer hover:bg-red-200 rounded-full transition-colors duration-200"
+                    className="todo-list_delete_button"
                     aria-label="Delete task"
                     onClick={() => onDelete(index)}
                 >
