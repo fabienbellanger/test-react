@@ -1,4 +1,4 @@
-import { MenuLinks } from '../../pages/layout';
+import { MenuLinks } from '../../models/MenuLinks';
 
 interface AppBarProps {
     title: string;

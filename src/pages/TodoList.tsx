@@ -26,16 +26,28 @@ export default function TodoList() {
     );
 }
 
+/**
+ * To-Do list header component properties
+ *
+ * @property {string} title Title of the list
+ * @property {number} tasksNumber Number of tasks in the list
+ */
 interface HeaderProps {
     title: string;
     tasksNumber: number;
 }
 
+/**
+ * To-Do list header component
+ *
+ * @param {HeaderProps} props Component properties
+ * @returns
+ */
 function Header({ title, tasksNumber }: HeaderProps) {
     return (
         <div className="px-12 py-2 pt-8">
             <h1 className="flex items-center">
-                <div className="text-gray-700 font-bold text-2xl uppercase">
+                <div className="text-teal-700 font-bold text-2xl uppercase">
                     {title}
                 </div>
                 {tasksNumber > 0 && (
