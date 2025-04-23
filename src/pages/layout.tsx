@@ -1,12 +1,23 @@
+import { useState } from 'react';
 import AppBar from '../components/layout/AppBar';
 import TodoList from './TodoList';
+import Links from './Links';
 
-export default function Layout() {
+enum MenuLinks {
+    TODO_LIST = 'To-Do List',
+    LINKS = 'Links',
+}
+
+function Layout() {
+    const [menuLinks, setMenuLinks] = useState<MenuLinks>(MenuLinks.TODO_LIST);
     return (
         <>
-            <AppBar title="My App" />
+            <AppBar title="My App" onMenuChange={setMenuLinks} />
 
-            <TodoList />
+            {menuLinks === MenuLinks.TODO_LIST && <TodoList />}
+            {menuLinks === MenuLinks.LINKS && <Links />}
         </>
     );
 }
+
+export { Layout, MenuLinks };

@@ -1,8 +1,11 @@
+import { MenuLinks } from '../../pages/layout';
+
 interface AppBarProps {
     title: string;
+    onMenuChange: (menu: MenuLinks) => void;
 }
 
-export default function AppBar({ title }: AppBarProps) {
+export default function AppBar({ title, onMenuChange }: AppBarProps) {
     return (
         <div className="flex items-center justify-between bg-gray-900 p-2">
             <div className="flex items-center gap-4">
@@ -10,9 +13,21 @@ export default function AppBar({ title }: AppBarProps) {
                 <h1 className="text-white text-2xl">{title}</h1>
             </div>
 
-            <button className="bg-teal-700 text-white px-4 py-2 rounded cursor-pointer hover:bg-teal-500 transition duration-500">
-                To-Do List
-            </button>
+            <div className="flex items-center justify-end gap-4">
+                <button
+                    className="layout_menu_button"
+                    onClick={() => onMenuChange(MenuLinks.TODO_LIST)}
+                >
+                    To-Do List
+                </button>
+
+                <button
+                    className="layout_menu_button"
+                    onClick={() => onMenuChange(MenuLinks.LINKS)}
+                >
+                    Links
+                </button>
+            </div>
         </div>
     );
 }
