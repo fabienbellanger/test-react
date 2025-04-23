@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import Task from '../../models/Task';
 
 interface TasksProps {
@@ -42,7 +41,7 @@ interface TaskItemProps {
 }
 
 // Component to render each task item
-const TaskItem = memo(function TaskItem({
+const TaskItem = function TaskItem({
     task,
     index,
     onToggle,
@@ -93,4 +92,4 @@ const TaskItem = memo(function TaskItem({
             </div>
         </li>
     );
-});
+};
