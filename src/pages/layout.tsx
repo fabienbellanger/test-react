@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AppBar from '../components/layout/AppBar';
 import TodoList from './TodoList';
-import Links from './Links';
+import Chatbot from './Chatbot';
 import { MenuLinks } from '../models/MenuLinks';
 
 export default function Layout() {
@@ -11,7 +11,7 @@ export default function Layout() {
             <AppBar title="My App" onMenuChange={setMenuLinks} />
 
             {menuLinks === MenuLinks.TODO_LIST && <TodoList />}
-            {menuLinks === MenuLinks.LINKS && <Links />}
+            {menuLinks === MenuLinks.CHATBOT && <Chatbot />}
         </>
     );
 }

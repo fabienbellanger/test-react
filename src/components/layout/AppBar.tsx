@@ -18,14 +18,14 @@ export default function AppBar({ title, onMenuChange }: AppBarProps) {
                     className="layout_menu_button"
                     onClick={() => onMenuChange(MenuLinks.TODO_LIST)}
                 >
-                    To-Do List
+                    {MenuLinks.TODO_LIST}
                 </button>
 
                 <button
                     className="layout_menu_button"
-                    onClick={() => onMenuChange(MenuLinks.LINKS)}
+                    onClick={() => onMenuChange(MenuLinks.CHATBOT)}
                 >
-                    Links
+                    {MenuLinks.CHATBOT}
                 </button>
             </div>
         </div>
