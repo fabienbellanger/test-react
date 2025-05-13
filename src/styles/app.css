@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
-/* Layout*/
+/* Layout */
 @import './layout.css';
 
-/* To-Do List*/
+/* To-Do List */
 @import './todo-list.css';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Input from '../components/todo_list/Input';
-import Tasks from '../components/todo_list/Tasks';
+import AddTask from '../components/todo_list/AddTask';
+import TaskList from '../components/todo_list/TaskList';
 import Task from '../models/Task';
 
 export default function TodoList() {
@@ -19,9 +19,9 @@ export default function TodoList() {
         <div className="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden my-16 pb-8">
             <Header title="To-Do List" tasksNumber={tasks.length} />
 
-            <Input placeholder="Add a new task" onClick={addTask} />
+            <AddTask placeholder="Add a new task" onClick={addTask} />
 
-            <Tasks tasks={tasks} onUpdate={setTasks} />
+            <TaskList tasks={tasks} onUpdate={setTasks} />
         </div>
     );
 }

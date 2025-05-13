@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-interface InputProps {
+interface AddTaskProps {
     placeholder?: string;
     onClick: (v: string) => void;
 }
 
-export default function Input({ placeholder, onClick }: InputProps) {
+export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,6 +15,11 @@ export default function Input({ placeholder, onClick }: InputProps) {
             : 'todo-list_button';
     }, [inputValue]);
 
+    /**
+     * Add a new task to the list
+     *
+     * @param {string} title Task title
+     */
     const addTask = useCallback(() => {
         if (inputValue.trim() !== '') {
             // Capitalize the task name
@@ -28,6 +33,11 @@ export default function Input({ placeholder, onClick }: InputProps) {
         }
     }, [inputValue, onClick]);
 
+    /**
+     * Handle the Enter key press
+     *
+     * @param e Keyboard event
+     */
     const validOnEnter = useCallback(
         (e: React.KeyboardEvent) => {
             if (e.key === 'Enter') {
@@ -39,6 +49,11 @@ export default function Input({ placeholder, onClick }: InputProps) {
         [addTask]
     );
 
+    /**
+     * Handle input change
+     *
+     * @param e Input change event
+     */
     const handleInputChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             setInputValue(e.target.value);
@@ -47,7 +62,7 @@ export default function Input({ placeholder, onClick }: InputProps) {
     );
 
     return (
-        <form className="w-full max-w-sm mx-auto px-4 py-2">
+        <div className="w-full max-w-sm mx-auto px-4 py-2">
             <div className="flex items-center border-b-2 border-teal-500 py-2">
                 <input
                     className="todo-list_input_add_task"
@@ -63,6 +78,6 @@ export default function Input({ placeholder, onClick }: InputProps) {
                     Add
                 </button>
             </div>
-        </form>
+        </div>
     );
 }

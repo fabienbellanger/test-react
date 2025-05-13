@@ -1,11 +1,16 @@
 import Task from '../../models/Task';
 
-interface TasksProps {
+interface TaskListProps {
     tasks: Task[];
     onUpdate: (updatedTasks: Task[]) => void;
 }
 
-export default function Tasks({ tasks, onUpdate }: TasksProps) {
+export default function TaskList({ tasks, onUpdate }: TaskListProps) {
+    /**
+     * Toggle the completion status of a task
+     *
+     * @param index Index of the task to toggle
+     */
     const handleToggle = (index: number) => {
         const updatedTasks = tasks.map((task, i) =>
             i === index ? { ...task, completed: !task.completed } : task
@@ -13,6 +18,11 @@ export default function Tasks({ tasks, onUpdate }: TasksProps) {
         onUpdate(updatedTasks);
     };
 
+    /**
+     * Delete a task from the list
+     *
+     * @param index Index of the task to delete
+     */
     const deleteTask = (index: number) => {
         const updatedTasks = tasks.filter((_, i) => i !== index);
         onUpdate(updatedTasks);
