@@ -2,7 +2,7 @@
 @plugin "daisyui" {
     themes: light --default, 'dim_custom' --prefersdark;
 }
-@plugin "daisyui/theme" {
+@plugin 'daisyui/theme' {
     name: 'dim_custom';
     default: false;
     prefersdark: true;
@@ -39,3 +39,14 @@
 
 /* To-Do List */
 @import './todo-list.css';
+
+body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    /* Disable the rubberbanding effect on Mac and iOS */
+    overscroll-behavior: none;
+}

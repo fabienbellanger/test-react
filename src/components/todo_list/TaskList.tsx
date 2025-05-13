@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Task from '../../models/Task';
 
 interface TaskListProps {
@@ -29,17 +30,25 @@ export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     };
 
     return (
-        <ul className="divide-y divide-gray-600 px-4 mx-2">
-            {tasks.map((task, i) => (
-                <TaskItem
-                    key={i}
-                    task={task}
-                    index={i}
-                    onToggle={handleToggle}
-                    onDelete={deleteTask}
-                />
-            ))}
-        </ul>
+        <div>
+            {tasks.length === 0 ? (
+                <div className="text-center italic">
+                    No tasks available. Add a new task to get started!
+                </div>
+            ) : (
+                <ul className="divide-y divide-gray-600 mx-2">
+                    {tasks.map((task, i) => (
+                        <TaskItem
+                            key={i}
+                            task={task}
+                            index={i}
+                            onToggle={handleToggle}
+                            onDelete={deleteTask}
+                        />
+                    ))}
+                </ul>
+            )}
+        </div>
     );
 }
 
@@ -51,7 +60,7 @@ interface TaskItemProps {
 }
 
 // Component to render each task item
-const TaskItem = function TaskItem({
+const TaskItem = memo(function TaskItem({
     task,
     index,
     onToggle,
@@ -74,11 +83,13 @@ const TaskItem = function TaskItem({
                         task.completed ? 'text-gray-400 line-through' : ''
                     }`}
                 >
-                    <span>{task.title}</span>
+                    <span className="block w-64 truncate overflow-hidden whitespace-nowrap">
+                        {task.title}
+                    </span>
                 </label>
                 <button
                     type="button"
-                    className="btn btn-xs btn-circle btn-ghost text-error"
+                    className="btn btn-xs btn-circle btn-error"
                     aria-label="Delete task"
                     onClick={() => onDelete(index)}
                 >
@@ -100,4 +111,4 @@ const TaskItem = function TaskItem({
             </div>
         </li>
     );
-};
+});

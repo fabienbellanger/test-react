@@ -49,16 +49,13 @@ interface HeaderProps {
  */
 function Header({ title, tasksNumber }: HeaderProps) {
     return (
-        <div className="px-6 py-2 pt-8">
+        <div className="py-2">
             <h1 className="flex items-center">
                 <div className="font-bold text-2xl uppercase">{title}</div>
                 {tasksNumber > 0 && (
-                    <div>
-                        <span>&nbsp;</span>
-                        <span className="badge badge-accent badge-outline badge-sm">
-                            {tasksNumber}
-                        </span>
-                    </div>
+                    <span className="badge badge-accent badge-outline badge-sm ml-4">
+                        {tasksNumber}
+                    </span>
                 )}
             </h1>
         </div>

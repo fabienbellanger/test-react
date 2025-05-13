@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import NavBar from '../components/layout/NavBar';
-import TodoList from './TodoList';
-import Chatbot from './Chatbot';
-import { MenuLinks } from '../models/MenuLinks';
-import Footer from '../components/layout/Footer';
+import NavBar from './NavBar';
+import TodoList from '../../pages/TodoList';
+import Chatbot from '../../pages/Chatbot';
+import { MenuLinks } from '../../models/MenuLinks';
+import Footer from './Footer';
 
 export default function Layout() {
     const [menuLinks, setMenuLinks] = useState<MenuLinks>(MenuLinks.TODO_LIST);

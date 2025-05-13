@@ -62,8 +62,8 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     );
 
     return (
-        <div className="w-full max-w-sm mx-auto px-4 py-2">
-            <div className="flex items-center gap-2 py-2">
+        <div className="w-full max-w-sm mx-auto py-2">
+            <div className="flex items-center gap-4 py-2">
                 <input
                     className="input input-bordered flex-1"
                     type="text"
