@@ -29,7 +29,7 @@ export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     };
 
     return (
-        <ul className="divide-y divide-gray-200 px-4 mx-8">
+        <ul className="divide-y divide-gray-600 px-4 mx-2">
             {tasks.map((task, i) => (
                 <TaskItem
                     key={i}
@@ -66,21 +66,19 @@ const TaskItem = function TaskItem({
                     type="checkbox"
                     checked={task.completed}
                     onChange={() => onToggle(index)}
-                    className="h-5 w-5 rounded cursor-pointer"
+                    className="checkbox checkbox-primary checkbox-md"
                 />
                 <label
                     htmlFor={`task_${index}`}
                     className={`ml-3 block flex-1 text-ellipsis cursor-pointer ${
-                        task.completed
-                            ? 'text-gray-400 line-through'
-                            : 'text-gray-700'
+                        task.completed ? 'text-gray-400 line-through' : ''
                     }`}
                 >
                     <span>{task.title}</span>
                 </label>
                 <button
                     type="button"
-                    className="todo-list_delete_button"
+                    className="btn btn-xs btn-circle btn-ghost text-error"
                     aria-label="Delete task"
                     onClick={() => onDelete(index)}
                 >

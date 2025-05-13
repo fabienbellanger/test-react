@@ -16,12 +16,16 @@ export default function TodoList() {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden my-16 pb-8">
-            <Header title="To-Do List" tasksNumber={tasks.length} />
+        <div className="max-w-md mx-auto overflow-hidden my-16 pb-8">
+            <div className="card card-border bg-base-200">
+                <div className="card-body">
+                    <Header title="To-Do List" tasksNumber={tasks.length} />
 
-            <AddTask placeholder="Add a new task" onClick={addTask} />
+                    <AddTask placeholder="Add a new task" onClick={addTask} />
 
-            <TaskList tasks={tasks} onUpdate={setTasks} />
+                    <TaskList tasks={tasks} onUpdate={setTasks} />
+                </div>
+            </div>
         </div>
     );
 }
@@ -45,13 +49,16 @@ interface HeaderProps {
  */
 function Header({ title, tasksNumber }: HeaderProps) {
     return (
-        <div className="px-12 py-2 pt-8">
+        <div className="px-6 py-2 pt-8">
             <h1 className="flex items-center">
-                <div className="text-teal-700 font-bold text-2xl uppercase">
-                    {title}
-                </div>
+                <div className="font-bold text-2xl uppercase">{title}</div>
                 {tasksNumber > 0 && (
-                    <span className="todo-list_header">{tasksNumber}</span>
+                    <div>
+                        <span>&nbsp;</span>
+                        <span className="badge badge-accent badge-outline badge-sm">
+                            {tasksNumber}
+                        </span>
+                    </div>
                 )}
             </h1>
         </div>

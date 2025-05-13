@@ -11,8 +11,8 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
 
     const buttonStyle = useMemo(() => {
         return inputValue.trim() === ''
-            ? 'todo-list_button_disabled'
-            : 'todo-list_button';
+            ? 'btn btn-disabled'
+            : 'btn btn-success';
     }, [inputValue]);
 
     /**
@@ -63,9 +63,9 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
 
     return (
         <div className="w-full max-w-sm mx-auto px-4 py-2">
-            <div className="flex items-center border-b-2 border-teal-500 py-2">
+            <div className="flex items-center gap-2 py-2">
                 <input
-                    className="todo-list_input_add_task"
+                    className="input input-bordered flex-1"
                     type="text"
                     placeholder={placeholder}
                     value={inputValue}
