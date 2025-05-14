@@ -20,8 +20,8 @@ export default function TodoList() {
     };
 
     return (
-        <div className="max-w-lg mx-auto overflow-hidden my-16 pb-8">
-            <div className="card card-border bg-base-200">
+        <div className="max-w-fit min-w-100 mx-auto overflow-hidden my-16 pb-8">
+            <div className="card card-border bg-base-200 mx-2">
                 <div className="card-body">
                     <Header title="To-Do List" tasksNumber={tasks.length} />
 
