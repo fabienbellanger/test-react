@@ -1,10 +1,21 @@
 import { MenuLinks } from '../../models/MenuLinks';
 
+/**
+ * Navigation bar component properties
+ *
+ * @property {string} title Title of the application
+ * @property {function} onMenuChange Callback function to handle menu changes
+ */
 interface NavBarProps {
     title: string;
     onMenuChange: (menu: MenuLinks) => void;
 }
 
+/**
+ * Navigation bar component
+ *
+ * @param {NavBarProps} props Component properties
+ */
 export default function NavBar({ title, onMenuChange }: NavBarProps) {
     return (
         <div className="navbar bg-base-300 shadow-smflex items-center justify-between">

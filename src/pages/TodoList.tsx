@@ -3,6 +3,10 @@ import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
 import Task from '../models/Task';
 
+/**
+ * To-Do list page component
+ *
+ */
 export default function TodoList() {
     const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -16,7 +20,7 @@ export default function TodoList() {
     };
 
     return (
-        <div className="max-w-md mx-auto overflow-hidden my-16 pb-8">
+        <div className="max-w-lg mx-auto overflow-hidden my-16 pb-8">
             <div className="card card-border bg-base-200">
                 <div className="card-body">
                     <Header title="To-Do List" tasksNumber={tasks.length} />

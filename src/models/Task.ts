@@ -1,6 +1,8 @@
 /**
  * Task model
- * 
+ *
+ * @property {string} title Task title
+ * @property {boolean} completed Task completion status
  */
 export default class Task {
     title: string;

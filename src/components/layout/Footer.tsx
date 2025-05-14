@@ -1,6 +1,10 @@
+/**
+ * Application footer
+ *
+ */
 export default function Footer() {
     return (
-        <footer className="footer fixed bottom-1 sm:footer-horizontal footer-center p-2 text-xs">
+        <footer className="footer fixed bottom-0 sm:footer-horizontal footer-center px-1 mt-2 mb-1 text-xs">
             <aside>
                 <p>Copyright © {new Date().getFullYear()}</p>
             </aside>

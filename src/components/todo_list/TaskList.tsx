@@ -1,11 +1,22 @@
 import { memo } from 'react';
 import Task from '../../models/Task';
 
+/**
+ * To-Do list component properties
+ *
+ * @property {Task[]} tasks List of tasks
+ * @property {function} onUpdate Callback function to handle task updates
+ */
 interface TaskListProps {
     tasks: Task[];
     onUpdate: (updatedTasks: Task[]) => void;
 }
 
+/**
+ * To-Do list component
+ *
+ * @param props Component properties
+ */
 export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     /**
      * Toggle the completion status of a task
@@ -52,6 +63,10 @@ export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     );
 }
 
+/**
+ * Task item component properties
+ *
+ */
 interface TaskItemProps {
     task: Task;
     index: number;
@@ -59,7 +74,10 @@ interface TaskItemProps {
     onDelete: (index: number) => void;
 }
 
-// Component to render each task item
+/**
+ * Component to render each task item
+ *
+ */
 const TaskItem = memo(function TaskItem({
     task,
     index,

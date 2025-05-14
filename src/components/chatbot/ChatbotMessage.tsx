@@ -1,3 +1,13 @@
+/**
+ * Chatbot massage component properties
+ *
+ * @property {string} direction Message direction ('start' or 'end')
+ * @property {string} message Message content
+ * @property {string} name Sender name (optional)
+ * @property {string} avatarUrl Avatar image URL (optional)
+ * @property {string} time Message time (optional)
+ * @property {string} footer Message footer (optional)
+ */
 interface ChatbotMessageProps {
     direction: 'start' | 'end';
     message: string;
@@ -7,6 +17,11 @@ interface ChatbotMessageProps {
     footer?: string;
 }
 
+/**
+ * Chatbot massage component
+ *
+ * @param {ChatbotMessageProps} props Component properties
+ */
 export default function ChatbotMessage({
     direction,
     message,

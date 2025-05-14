@@ -5,6 +5,10 @@ import Chatbot from '../../pages/Chatbot';
 import { MenuLinks } from '../../models/MenuLinks';
 import Footer from './Footer';
 
+/**
+ * Application layout component
+ *
+ */
 export default function Layout() {
     const [menuLinks, setMenuLinks] = useState<MenuLinks>(MenuLinks.TODO_LIST);
     return (

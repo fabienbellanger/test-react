@@ -1,10 +1,21 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
+/**
+ * To-Do list add task component properties
+ *
+ * @property {string} placeholder Input placeholder
+ * @property {function} onClick Callback function to handle task addition
+ */
 interface AddTaskProps {
     placeholder?: string;
     onClick: (v: string) => void;
 }
 
+/**
+ * To-Do list add task component
+ *
+ * @param {AddTaskProps} props Component properties
+ */
 export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
