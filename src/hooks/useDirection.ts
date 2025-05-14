@@ -10,6 +10,7 @@ export default function useDirection() {
 
     /**
      * Toggle the text direction between RTL and LTR
+     *
      */
     const toggleDirection = useCallback(() => {
         setIsRTL((prev) => !prev);

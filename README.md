@@ -2,4 +2,6 @@
 
 ## TODO
 
--   [ ] Use react-router
+-   [x] Use react-router
+-   [ ] Improve error page
+-   [ ] Add state management (react Context, redux, etc.)
