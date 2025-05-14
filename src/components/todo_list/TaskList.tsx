@@ -107,7 +107,7 @@ const TaskItem = memo(function TaskItem({
                 </label>
                 <button
                     type="button"
-                    className="btn btn-xs btn-circle btn-error"
+                    className="btn btn-xs btn-circle btn-soft btn-error"
                     aria-label="Delete task"
                     onClick={() => onDelete(index)}
                 >

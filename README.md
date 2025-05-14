@@ -3,5 +3,7 @@
 ## TODO
 
 -   [x] Use react-router
--   [ ] Improve error page
+-   [x] Improve error page
 -   [ ] Add state management (react Context, redux, etc.)
+-   [ ] Use reducer hook
+-   [ ] Add unit tests

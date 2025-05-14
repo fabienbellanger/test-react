@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import Chatbot from './pages/Chatbot';
 import TodoList from './pages/TodoList';
 import Layout from './components/layout/Layout';
@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
         Component: Layout,
         errorElement: <ErrorPage />,
         children: [
-            { path: '', Component: TodoList },
+            { path: '', Component: () => <Navigate to="todo" replace /> }, // Redirection
             { path: 'todo', Component: TodoList },
             { path: 'chatbot', Component: Chatbot },
         ],

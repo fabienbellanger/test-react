@@ -23,7 +23,7 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     const buttonStyle = useMemo(() => {
         return inputValue.trim() === ''
             ? 'btn btn-disabled'
-            : 'btn btn-success';
+            : 'btn btn-soft btn-primary';
     }, [inputValue]);
 
     /**

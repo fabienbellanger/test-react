@@ -27,11 +27,11 @@ export default function NavBar({ title }: NavBarProps) {
         isTransitioning: boolean;
     }) => {
         if (isPending || isTransitioning) {
-            return 'btn btn-disabled';
+            return 'btn btn-soft btn-disabled';
         } else if (isActive) {
-            return 'btn btn-primary';
+            return 'btn btn-soft btn-primary';
         }
-        return 'btn btn-secondary';
+        return 'btn btn-soft btn-outline';
     };
 
     return (
