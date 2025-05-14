@@ -1,14 +1,13 @@
-import { MenuLinks } from '../../models/MenuLinks';
+import useDirection from '../../hooks/useDirection';
+import { NavLink } from 'react-router';
 
 /**
  * Navigation bar component properties
  *
  * @property {string} title Title of the application
- * @property {function} onMenuChange Callback function to handle menu changes
  */
 interface NavBarProps {
     title: string;
-    onMenuChange: (menu: MenuLinks) => void;
 }
 
 /**
@@ -16,28 +15,48 @@ interface NavBarProps {
  *
  * @param {NavBarProps} props Component properties
  */
-export default function NavBar({ title, onMenuChange }: NavBarProps) {
-    return (
-        <div className="navbar bg-base-300 shadow-smflex items-center justify-between">
-            <div className="flex items-center gap-4">
-                <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
-                <h1 className="text-white text-2xl">{title}</h1>
-            </div>
-            <div className="flex items-center justify-end gap-4">
-                <button
-                    className="btn btn-accent"
-                    onClick={() => onMenuChange(MenuLinks.TODO_LIST)}
-                >
-                    {MenuLinks.TODO_LIST}
-                </button>
+export default function NavBar({ title }: NavBarProps) {
+    const { isRTL, toggleDirection } = useDirection();
+    const navLinkActiveClass = ({
+        isPending,
+        isActive,
+        isTransitioning,
+    }: {
+        isPending: boolean;
+        isActive: boolean;
+        isTransitioning: boolean;
+    }) => {
+        if (isPending || isTransitioning) {
+            return 'btn btn-disabled';
+        } else if (isActive) {
+            return 'btn btn-primary';
+        }
+        return 'btn btn-secondary';
+    };
 
-                <button
-                    className="btn btn-accent"
-                    onClick={() => onMenuChange(MenuLinks.CHATBOT)}
-                >
-                    {MenuLinks.CHATBOT}
-                </button>
-            </div>
-        </div>
+    return (
+        <header>
+            <nav className="navbar bg-base-300 shadow-smflex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
+                    <h1 className="text-2xl text-ellipsis whitespace-nowrap overflow-hidden">
+                        {title}
+                    </h1>
+                </div>
+                <div className="flex items-center justify-end gap-2">
+                    <button className="btn" onClick={toggleDirection}>
+                        {isRTL ? 'LTR' : 'RTL'}
+                    </button>
+
+                    <NavLink to="/todo" className={navLinkActiveClass}>
+                        To-Do List
+                    </NavLink>
+
+                    <NavLink to="/chatbot" className={navLinkActiveClass}>
+                        Chatbot
+                    </NavLink>
+                </div>
+            </nav>
+        </header>
     );
 }

@@ -1,9 +1,10 @@
-import Layout from './components/layout/Layout';
+import { RouterProvider } from 'react-router';
+import { router } from './Router';
 
 export default function App() {
     return (
         <>
-            <Layout />
+            <RouterProvider router={router} />
         </>
     );
 }

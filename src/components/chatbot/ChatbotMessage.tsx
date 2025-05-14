@@ -34,7 +34,6 @@ export default function ChatbotMessage({
         direction === 'start' ? 'chat-start' : 'chat-end'
     }`;
 
-    // Fonction utilitaire pour générer l'avatar placeholder
     const getAvatarPlaceholder = () => {
         if (name.trim().length > 0) {
             return name.charAt(0).toUpperCase();
@@ -48,7 +47,6 @@ export default function ChatbotMessage({
             : 'bg-warning text-warning-content'
     }`;
 
-    // Fonction utilitaire pour afficher l'avatar
     const renderAvatar = () => {
         if (avatarUrl) {
             return (

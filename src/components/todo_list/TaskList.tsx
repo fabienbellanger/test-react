@@ -15,13 +15,13 @@ interface TaskListProps {
 /**
  * To-Do list component
  *
- * @param props Component properties
+ * @param {TaskListProps} props Component properties
  */
 export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     /**
      * Toggle the completion status of a task
      *
-     * @param index Index of the task to toggle
+     * @param {number} index Index of the task to toggle
      */
     const handleToggle = (index: number) => {
         const updatedTasks = tasks.map((task, i) =>
@@ -33,7 +33,7 @@ export default function TaskList({ tasks, onUpdate }: TaskListProps) {
     /**
      * Delete a task from the list
      *
-     * @param index Index of the task to delete
+     * @param {number} index Index of the task to delete
      */
     const deleteTask = (index: number) => {
         const updatedTasks = tasks.filter((_, i) => i !== index);

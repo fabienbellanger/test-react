@@ -13,7 +13,7 @@ export default function TodoList() {
     /**
      * Add a new task to the list
      *
-     * @param title Task title
+     * @param {string} title Task title
      */
     const addTask = (title: string) => {
         setTasks((prevTasks) => [...prevTasks, new Task(title)]);

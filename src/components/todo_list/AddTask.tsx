@@ -47,7 +47,7 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     /**
      * Handle the Enter key press
      *
-     * @param e Keyboard event
+     * @param {React.KeyboardEvent} e Keyboard event
      */
     const validOnEnter = useCallback(
         (e: React.KeyboardEvent) => {
@@ -63,7 +63,7 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
     /**
      * Handle input change
      *
-     * @param e Input change event
+     * @param {React.ChangeEvent<HTMLInputElement>} e Input change event
      */
     const handleInputChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
