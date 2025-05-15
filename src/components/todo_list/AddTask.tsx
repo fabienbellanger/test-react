@@ -1,14 +1,15 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
+import Task from '../../models/Task';
 
 /**
  * To-Do list add task component properties
  *
  * @property {string} placeholder Input placeholder
- * @property {function} onClick Callback function to handle task addition
+ * @property {function} add Callback function to handle task addition
  */
 interface AddTaskProps {
     placeholder?: string;
-    onClick: (v: string) => void;
+    add: (v: Task) => void;
 }
 
 /**
@@ -16,7 +17,7 @@ interface AddTaskProps {
  *
  * @param {AddTaskProps} props Component properties
  */
-export default function AddTask({ placeholder, onClick }: AddTaskProps) {
+export default function AddTask({ placeholder, add }: AddTaskProps) {
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -37,12 +38,12 @@ export default function AddTask({ placeholder, onClick }: AddTaskProps) {
             let taskName = inputValue.trim();
             taskName = taskName.charAt(0).toUpperCase() + taskName.slice(1);
 
-            onClick(taskName);
+            add(new Task(taskName));
 
             setInputValue('');
             inputRef.current?.focus();
         }
-    }, [inputValue, onClick]);
+    }, [inputValue, add]);
 
     /**
      * Handle the Enter key press

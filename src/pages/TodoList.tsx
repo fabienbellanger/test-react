@@ -1,33 +1,28 @@
-import { useState } from 'react';
 import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
-import Task from '../models/Task';
+import useTaskReducer from '../hooks/useTaskReducer';
 
 /**
  * To-Do list page component
  *
  */
 export default function TodoList() {
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    /**
-     * Add a new task to the list
-     *
-     * @param {string} title Task title
-     */
-    const addTask = (title: string) => {
-        setTasks((prevTasks) => [...prevTasks, new Task(title)]);
-    };
+    const { tasks, taskCount, addTask, deleteTask, toggleTask } =
+        useTaskReducer();
 
     return (
-        <div className="max-w-fit min-w-100 mx-auto overflow-hidden my-16 pb-8">
-            <div className="card card-border bg-base-200 mx-2">
+        <div className="max-w-fit min-w-100 mx-auto my-16 pb-8">
+            <div className="card card-border bg-base-200 overflow-hidden mx-2">
                 <div className="card-body">
-                    <Header title="To-Do List" tasksNumber={tasks.length} />
+                    <Header title="To-Do List" tasksNumber={taskCount} />
 
-                    <AddTask placeholder="Add a new task" onClick={addTask} />
+                    <AddTask placeholder="Add a new task" add={addTask} />
 
-                    <TaskList tasks={tasks} onUpdate={setTasks} />
+                    <TaskList
+                        tasks={tasks}
+                        onToggle={toggleTask}
+                        onDelete={deleteTask}
+                    />
                 </div>
             </div>
         </div>

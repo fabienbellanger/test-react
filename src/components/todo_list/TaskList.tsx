@@ -5,11 +5,13 @@ import Task from '../../models/Task';
  * To-Do list component properties
  *
  * @property {Task[]} tasks List of tasks
- * @property {function} onUpdate Callback function to handle task updates
+ * @property {function} onToggle Callback function to handle task toggling
+ * @property {function} onDelete Callback function to handle task deletion
  */
 interface TaskListProps {
     tasks: Task[];
-    onUpdate: (updatedTasks: Task[]) => void;
+    onToggle: (index: number) => void;
+    onDelete: (index: number) => void;
 }
 
 /**
@@ -17,34 +19,30 @@ interface TaskListProps {
  *
  * @param {TaskListProps} props Component properties
  */
-export default function TaskList({ tasks, onUpdate }: TaskListProps) {
-    /**
-     * Toggle the completion status of a task
-     *
-     * @param {number} index Index of the task to toggle
-     */
-    const handleToggle = (index: number) => {
-        const updatedTasks = tasks.map((task, i) =>
-            i === index ? { ...task, completed: !task.completed } : task
-        );
-        onUpdate(updatedTasks);
-    };
-
-    /**
-     * Delete a task from the list
-     *
-     * @param {number} index Index of the task to delete
-     */
-    const deleteTask = (index: number) => {
-        const updatedTasks = tasks.filter((_, i) => i !== index);
-        onUpdate(updatedTasks);
-    };
-
+export default function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
     return (
         <div>
             {tasks.length === 0 ? (
-                <div className="text-center italic">
-                    No tasks available. Add a new task to get started!
+                <div role="alert" className="alert alert-horizontal">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        className="stroke-info h-6 w-6 shrink-0"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                    </svg>
+                    <div>
+                        <h3 className="font-bold">No tasks available</h3>
+                        <div className="text-xs">
+                            Add a new task to get started!
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <ul className="divide-y divide-gray-600 mx-2">
@@ -53,8 +51,8 @@ export default function TaskList({ tasks, onUpdate }: TaskListProps) {
                             key={i}
                             task={task}
                             index={i}
-                            onToggle={handleToggle}
-                            onDelete={deleteTask}
+                            onToggle={onToggle}
+                            onDelete={onDelete}
                         />
                     ))}
                 </ul>
