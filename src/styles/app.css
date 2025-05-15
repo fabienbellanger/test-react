@@ -37,9 +37,6 @@
     --noise: 0;
 }
 
-/* To-Do List */
-@import './todo-list.css';
-
 body {
     font-synthesis: none;
     text-rendering: optimizeLegibility;
