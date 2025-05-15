@@ -5,7 +5,7 @@ import Task from '../models/Task';
  * Task action types
  *
  */
-enum TaskActionType {
+export enum TaskActionType {
     ADD_TASK = 'ADD_TASK',
     DELETE_TASK = 'DELETE_TASK',
     TOGGLE_TASK = 'TOGGLE_TASK',
@@ -18,7 +18,7 @@ enum TaskActionType {
  * @property {Task} payload Task object
  * @property {number} key Task index
  */
-interface TaskAction {
+export interface TaskAction {
     type: TaskActionType;
     payload?: Task;
     key?: number;
@@ -42,21 +42,27 @@ interface TaskState {
  * @returns {TaskState}
  */
 function taskReducer(state: TaskState, action: TaskAction): TaskState {
+    let newState: TaskState;
+
     switch (action.type) {
-        case TaskActionType.ADD_TASK:
-            return {
+        case TaskActionType.ADD_TASK: {
+            newState = {
                 ...state,
                 tasks: action.payload
                     ? [...state.tasks, action.payload]
                     : state.tasks,
             };
-        case TaskActionType.DELETE_TASK:
-            return {
+            break;
+        }
+        case TaskActionType.DELETE_TASK: {
+            newState = {
                 ...state,
                 tasks: state.tasks.filter((_, i) => i !== action.key),
             };
-        case TaskActionType.TOGGLE_TASK:
-            return {
+            break;
+        }
+        case TaskActionType.TOGGLE_TASK: {
+            newState = {
                 ...state,
                 tasks: state.tasks.map((task, i) =>
                     i === action.key
@@ -64,8 +70,33 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
                         : task
                 ),
             };
+            break;
+        }
         default:
             throw Error('Unknown action for taskReducer: ' + action.type);
+    }
+
+    // Save the new state to session storage
+    try {
+        sessionStorage.setItem('tasks', JSON.stringify(newState.tasks));
+    } catch (error) {
+        throw Error('Error saving tasks to sessionStorage:' + error);
+    }
+
+    return newState;
+}
+
+/**
+ * Initializes the task reducer
+ *
+ * @returns
+ */
+function initTaskReducer(): TaskState {
+    try {
+        const tasks = JSON.parse(sessionStorage.getItem('tasks') || '[]');
+        return { tasks };
+    } catch (error) {
+        throw Error('Error getting tasks from sessionStorage:' + error);
     }
 }
 
@@ -74,27 +105,25 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
  *
  */
 export default function useTaskReducer() {
-    const [state, dispatch] = useReducer(taskReducer, {
-        tasks: [],
-    });
+    const [state, dispatch] = useReducer(taskReducer, initTaskReducer());
 
     return {
+        dispatch,
         tasks: state.tasks,
-        taskCount: state.tasks.length,
         addTask: useCallback(
             (task: Task) =>
                 dispatch({ type: TaskActionType.ADD_TASK, payload: task }),
             []
         ),
-        deleteTask: useCallback(
-            (key: number) =>
-                dispatch({ type: TaskActionType.DELETE_TASK, key }),
-            []
-        ),
-        toggleTask: useCallback(
-            (key: number) =>
-                dispatch({ type: TaskActionType.TOGGLE_TASK, key }),
-            []
-        ),
+        // deleteTask: useCallback(
+        //     (key: number) =>
+        //         dispatch({ type: TaskActionType.DELETE_TASK, key }),
+        //     []
+        // ),
+        // toggleTask: useCallback(
+        //     (key: number) =>
+        //         dispatch({ type: TaskActionType.TOGGLE_TASK, key }),
+        //     []
+        // ),
     };
 }

@@ -1,6 +1,7 @@
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { Outlet } from 'react-router';
+import TasksProvider from '../providers/TasksProvider';
 
 /**
  * Application layout component
@@ -8,11 +9,13 @@ import { Outlet } from 'react-router';
  */
 export default function Layout() {
     return (
-        <div className="flex flex-col min-h-screen bg-base-100">
-            <NavBar title="My App" />
-            <Outlet />
+        <TasksProvider>
+            <div className="flex flex-col min-h-screen bg-base-100">
+                <NavBar title="My App" />
+                <Outlet />
 
-            <Footer />
-        </div>
+                <Footer />
+            </div>
+        </TasksProvider>
     );
 }

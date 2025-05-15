@@ -1,25 +1,18 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import Task from '../../models/Task';
-
-/**
- * To-Do list component properties
- *
- * @property {Task[]} tasks List of tasks
- * @property {function} onToggle Callback function to handle task toggling
- * @property {function} onDelete Callback function to handle task deletion
- */
-interface TaskListProps {
-    tasks: Task[];
-    onToggle: (index: number) => void;
-    onDelete: (index: number) => void;
-}
+import {
+    TasksContext,
+    TasksDispatchContext,
+} from '../../contexts/TasksContext';
+import { TaskActionType } from '../../hooks/useTaskReducer';
 
 /**
  * To-Do list component
  *
- * @param {TaskListProps} props Component properties
  */
-export default function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
+export default function TaskList() {
+    const tasks = useContext(TasksContext);
+
     return (
         <div>
             {tasks.length === 0 ? (
@@ -47,13 +40,7 @@ export default function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
             ) : (
                 <ul className="divide-y divide-gray-600 mx-2">
                     {tasks.map((task, i) => (
-                        <TaskItem
-                            key={i}
-                            task={task}
-                            index={i}
-                            onToggle={onToggle}
-                            onDelete={onDelete}
-                        />
+                        <TaskItem key={i} task={task} index={i} />
                     ))}
                 </ul>
             )}
@@ -64,24 +51,21 @@ export default function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
 /**
  * Task item component properties
  *
+ * @property {Task} task Task object
+ * @property {number} index Task index
  */
 interface TaskItemProps {
     task: Task;
     index: number;
-    onToggle: (index: number) => void;
-    onDelete: (index: number) => void;
 }
 
 /**
  * Component to render each task item
  *
  */
-const TaskItem = memo(function TaskItem({
-    task,
-    index,
-    onToggle,
-    onDelete,
-}: TaskItemProps) {
+const TaskItem = memo(function TaskItem({ task, index }: TaskItemProps) {
+    const dispatch = useContext(TasksDispatchContext);
+
     return (
         <li className="py-2">
             <div className="flex items-center justify-between">
@@ -90,7 +74,12 @@ const TaskItem = memo(function TaskItem({
                     name={'task_' + index}
                     type="checkbox"
                     checked={task.completed}
-                    onChange={() => onToggle(index)}
+                    onChange={() =>
+                        dispatch({
+                            type: TaskActionType.TOGGLE_TASK,
+                            key: index,
+                        })
+                    }
                     className="checkbox checkbox-primary checkbox-md"
                 />
                 <label
@@ -107,7 +96,12 @@ const TaskItem = memo(function TaskItem({
                     type="button"
                     className="btn btn-xs btn-circle btn-soft btn-error"
                     aria-label="Delete task"
-                    onClick={() => onDelete(index)}
+                    onClick={() =>
+                        dispatch({
+                            type: TaskActionType.DELETE_TASK,
+                            key: index,
+                        })
+                    }
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

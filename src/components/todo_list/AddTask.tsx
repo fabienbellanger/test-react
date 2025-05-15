@@ -1,15 +1,14 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 import Task from '../../models/Task';
+import { AddTaskContext } from '../../contexts/TasksContext';
 
 /**
  * To-Do list add task component properties
  *
  * @property {string} placeholder Input placeholder
- * @property {function} add Callback function to handle task addition
  */
 interface AddTaskProps {
     placeholder?: string;
-    add: (v: Task) => void;
 }
 
 /**
@@ -17,9 +16,10 @@ interface AddTaskProps {
  *
  * @param {AddTaskProps} props Component properties
  */
-export default function AddTask({ placeholder, add }: AddTaskProps) {
+export default function AddTask({ placeholder }: AddTaskProps) {
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
+    const addTask = useContext(AddTaskContext);
 
     const buttonStyle = useMemo(() => {
         return inputValue.trim() === ''
@@ -32,18 +32,18 @@ export default function AddTask({ placeholder, add }: AddTaskProps) {
      *
      * @param {string} title Task title
      */
-    const addTask = useCallback(() => {
+    const add = useCallback(() => {
         if (inputValue.trim() !== '') {
             // Capitalize the task name
             let taskName = inputValue.trim();
             taskName = taskName.charAt(0).toUpperCase() + taskName.slice(1);
 
-            add(new Task(taskName));
+            addTask(new Task(taskName));
 
             setInputValue('');
             inputRef.current?.focus();
         }
-    }, [inputValue, add]);
+    }, [inputValue, addTask]);
 
     /**
      * Handle the Enter key press
@@ -55,10 +55,10 @@ export default function AddTask({ placeholder, add }: AddTaskProps) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 e.stopPropagation();
-                addTask();
+                add();
             }
         },
-        [addTask]
+        [add]
     );
 
     /**
@@ -86,7 +86,7 @@ export default function AddTask({ placeholder, add }: AddTaskProps) {
                     ref={inputRef}
                     autoFocus
                 />
-                <button className={buttonStyle} type="button" onClick={addTask}>
+                <button className={buttonStyle} type="button" onClick={add}>
                     Add
                 </button>
             </div>
