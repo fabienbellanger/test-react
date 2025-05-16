@@ -5,6 +5,7 @@ import {
     TasksDispatchContext,
 } from '../../contexts/TasksContext';
 import { TaskActionType } from '../../hooks/useTaskReducer';
+import { MdDelete, MdInfoOutline } from 'react-icons/md';
 
 /**
  * To-Do list component
@@ -17,19 +18,7 @@ export default function TaskList() {
         <div>
             {tasks.length === 0 ? (
                 <div role="alert" className="alert alert-horizontal">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="stroke-info h-6 w-6 shrink-0"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                    </svg>
+                    <MdInfoOutline className="text-xl text-info" />
                     <div>
                         <h3 className="font-bold">No tasks available</h3>
                         <div className="text-xs">
@@ -94,7 +83,7 @@ const TaskItem = memo(function TaskItem({ task, index }: TaskItemProps) {
                 </label>
                 <button
                     type="button"
-                    className="btn btn-xs btn-circle btn-soft btn-error"
+                    className="btn btn-sm btn-circle btn-ghost"
                     aria-label="Delete task"
                     onClick={() =>
                         dispatch({
@@ -103,20 +92,7 @@ const TaskItem = memo(function TaskItem({ task, index }: TaskItemProps) {
                         })
                     }
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2.5}
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                        />
-                    </svg>
+                    <MdDelete className="text-xl text-error" />
                 </button>
             </div>
         </li>
