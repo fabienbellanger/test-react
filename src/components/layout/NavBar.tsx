@@ -1,5 +1,6 @@
 import useDirection from '../../hooks/useDirection';
 import { NavLink } from 'react-router';
+import useThemeMode from '../../hooks/useThemeMode';
 
 /**
  * Navigation bar component properties
@@ -17,6 +18,8 @@ interface NavBarProps {
  */
 export default function NavBar({ title }: NavBarProps) {
     const { isRTL, toggleDirection } = useDirection();
+    const { theme, toggleTheme } = useThemeMode();
+
     const navLinkActiveClass = ({
         isPending,
         isActive,
@@ -44,6 +47,10 @@ export default function NavBar({ title }: NavBarProps) {
                     </h1>
                 </div>
                 <div className="flex items-center justify-end gap-2">
+                    <button className="btn" onClick={toggleTheme}>
+                        {theme}
+                    </button>
+
                     <button className="btn" onClick={toggleDirection}>
                         {isRTL ? 'LTR' : 'RTL'}
                     </button>
