@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { AppSlice, AppState } from './AppStore';
+import { AppStore, AppState } from './AppStore';
 
 /**
  * Global state
@@ -16,6 +16,6 @@ export interface GlobalState {
  */
 export const store = configureStore({
     reducer: {
-        app: AppSlice.reducer,
+        app: AppStore.reducer,
     },
 });
