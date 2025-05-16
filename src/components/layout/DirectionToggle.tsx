@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDirection } from '../../stores/AppStore';
+import { AppDirection, toggleDirection } from '../../stores/AppStore';
 import { GlobalState } from '../../stores';
 
 /**
@@ -11,8 +11,11 @@ export default function DirectionToggle() {
     const dispatch = useDispatch();
 
     return (
-        <button className="btn" onClick={() => dispatch(toggleDirection())}>
-            {direction === 'rtl' ? 'LTR' : 'RTL'}
+        <button
+            className="btn btn-ghost"
+            onClick={() => dispatch(toggleDirection())}
+        >
+            {direction === AppDirection.LTR ? 'LTR' : 'RTL'}
         </button>
     );
 }

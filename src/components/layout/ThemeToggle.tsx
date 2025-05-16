@@ -12,11 +12,14 @@ export default function ThemeToggle() {
     const dispatch = useDispatch();
 
     return (
-        <button className="btn text-xl" onClick={() => dispatch(toggleTheme())}>
+        <button
+            className="btn btn-ghost text-xl"
+            onClick={() => dispatch(toggleTheme())}
+        >
             {theme === AppTheme.DARK ? (
-                <MdLightMode className="text-yellow-600" />
-            ) : (
                 <MdDarkMode className="text-blue-900" />
+            ) : (
+                <MdLightMode className="text-yellow-600" />
             )}
         </button>
     );
