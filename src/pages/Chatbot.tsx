@@ -28,6 +28,14 @@ const messages = [
         '12:47',
         'delivered'
     ),
+    Message.init(
+        '...',
+        MessageDirection.END,
+        'Anakin Skywalker',
+        'https://img.daisyui.com/images/profile/demo/anakeen@192.webp',
+        '12:48',
+        undefined
+    ),
 ];
 
 /**

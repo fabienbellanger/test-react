@@ -17,9 +17,9 @@ export default function ThemeToggle() {
             onClick={() => dispatch(toggleTheme())}
         >
             {theme === AppTheme.DARK ? (
-                <MdDarkMode className="text-blue-900" />
+                <MdDarkMode />
             ) : (
-                <MdLightMode className="text-yellow-600" />
+                <MdLightMode className="text-yellow-500" />
             )}
         </button>
     );
