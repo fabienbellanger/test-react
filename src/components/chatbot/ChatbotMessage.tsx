@@ -1,20 +1,14 @@
+import Message from '../../models/Message';
+
 /**
  * Chatbot massage component properties
  *
  * @property {string} direction Message direction ('start' or 'end')
- * @property {string} message Message content
- * @property {string} name Sender name (optional)
- * @property {string} avatarUrl Avatar image URL (optional)
- * @property {string} time Message time (optional)
- * @property {string} footer Message footer (optional)
+ * @property {Message} message Message
  */
 interface ChatbotMessageProps {
     direction: 'start' | 'end';
-    message: string;
-    name?: string;
-    avatarUrl?: string;
-    time?: string;
-    footer?: string;
+    message: Message;
 }
 
 /**
@@ -25,18 +19,14 @@ interface ChatbotMessageProps {
 export default function ChatbotMessage({
     direction,
     message,
-    name = '', // Valeur par défaut
-    avatarUrl,
-    time,
-    footer,
 }: ChatbotMessageProps) {
     const chatClasse = `chat ${
         direction === 'start' ? 'chat-start' : 'chat-end'
     }`;
 
     const getAvatarPlaceholder = () => {
-        if (name.trim().length > 0) {
-            return name.charAt(0).toUpperCase();
+        if (message.name && message.name.trim().length > 0) {
+            return message.name.charAt(0).toUpperCase();
         }
         return direction === 'start' ? 'S' : 'E';
     };
@@ -48,11 +38,11 @@ export default function ChatbotMessage({
     }`;
 
     const renderAvatar = () => {
-        if (avatarUrl) {
+        if (message.avatarUrl) {
             return (
                 <div className="chat-image avatar">
                     <div className="w-10 rounded-full">
-                        <img alt="Avatar" src={avatarUrl} />
+                        <img alt="Avatar" src={message.avatarUrl} />
                     </div>
                 </div>
             );
@@ -70,11 +60,15 @@ export default function ChatbotMessage({
         <div className={chatClasse}>
             {renderAvatar()}
             <div className="chat-header">
-                {name}
-                {time && <time className="text-xs opacity-50">{time}</time>}
+                {message.name}
+                {message.time && (
+                    <time className="text-xs opacity-50">{message.time}</time>
+                )}
             </div>
-            <div className="chat-bubble">{message}</div>
-            {footer && <div className="chat-footer opacity-50">{footer}</div>}
+            <div className="chat-bubble">{message.msg}</div>
+            {message.state && (
+                <div className="chat-footer opacity-50">{message.state}</div>
+            )}
         </div>
     );
 }
