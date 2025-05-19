@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
 import { TasksContext } from '../contexts/TasksContext';
@@ -40,15 +40,6 @@ interface HeaderProps {
  */
 function Header({ title }: HeaderProps) {
     const tasks = useContext(TasksContext);
-    const [animate, setAnimate] = useState(false);
-
-    useEffect(() => {
-        if (tasks.length > 0) {
-            setAnimate(true);
-            const timeout = setTimeout(() => setAnimate(false), 200);
-            return () => clearTimeout(timeout);
-        }
-    }, [tasks.length]);
 
     return (
         <div className="py-2">
@@ -58,14 +49,10 @@ function Header({ title }: HeaderProps) {
                     {tasks.length > 0 && (
                         <motion.span
                             className="badge badge-accent badge-outline badge-sm mx-4"
-                            initial={{ scale: 0, opacity: 0.5 }}
-                            animate={
-                                animate
-                                    ? { scale: [1, 1.2, 1], opacity: 1 }
-                                    : { scale: 1, opacity: 1 }
-                            }
-                            exit={{ scale: 0, opacity: 0 }}
-                            transition={{ duration: 0.2, times: [0, 0.5, 1] }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
                         >
                             {tasks.length}
                         </motion.span>
