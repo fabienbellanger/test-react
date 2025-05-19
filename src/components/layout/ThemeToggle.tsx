@@ -1,4 +1,4 @@
-import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 import { AppTheme, toggleTheme } from '../../stores/AppStore.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalState } from '../../stores/index.ts';
@@ -13,13 +13,13 @@ export default function ThemeToggle() {
 
     return (
         <button
-            className="btn btn-ghost text-xl"
+            className="btn btn-ghost text-xl px-2"
             onClick={() => dispatch(toggleTheme())}
         >
             {theme === AppTheme.DARK ? (
-                <MdDarkMode />
+                <MdOutlineDarkMode />
             ) : (
-                <MdLightMode className="text-yellow-500" />
+                <MdOutlineLightMode className="text-yellow-500" />
             )}
         </button>
     );

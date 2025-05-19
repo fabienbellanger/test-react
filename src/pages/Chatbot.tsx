@@ -18,7 +18,7 @@ const messages = [
         'Anakin Skywalker',
         undefined,
         '12:46',
-        undefined
+        'sent'
     ),
     Message.init(
         'You were like a brother to me, Anakin.',
