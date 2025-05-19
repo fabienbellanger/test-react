@@ -10,7 +10,11 @@ describe('useTaskReducer', () => {
 
     it('adds a task', () => {
         const { result } = renderHook(() => useTaskReducer());
-        const newTask: Task = { title: 'Test', completed: false };
+        const newTask: Task = {
+            id: crypto.randomUUID(),
+            title: 'Test',
+            completed: false,
+        };
 
         act(() => {
             result.current.addTask(newTask);
@@ -22,7 +26,8 @@ describe('useTaskReducer', () => {
 
     it('deletes a task', () => {
         const { result } = renderHook(() => useTaskReducer());
-        const task: Task = { title: 'To delete', completed: false };
+        const taskId = crypto.randomUUID();
+        const task: Task = { id: taskId, title: 'To delete', completed: false };
 
         act(() => {
             result.current.addTask(task);
@@ -31,7 +36,7 @@ describe('useTaskReducer', () => {
         act(() => {
             result.current.dispatch({
                 type: TaskActionType.DELETE_TASK,
-                key: 0,
+                key: taskId,
             });
         });
 
@@ -40,7 +45,8 @@ describe('useTaskReducer', () => {
 
     it("toggles a task's status", () => {
         const { result } = renderHook(() => useTaskReducer());
-        const task: Task = { title: 'To toggle', completed: false };
+        const taskId = crypto.randomUUID();
+        const task: Task = { id: taskId, title: 'To toggle', completed: false };
 
         act(() => {
             result.current.addTask(task);
@@ -49,7 +55,7 @@ describe('useTaskReducer', () => {
         act(() => {
             result.current.dispatch({
                 type: TaskActionType.TOGGLE_TASK,
-                key: 0,
+                key: taskId,
             });
         });
 
