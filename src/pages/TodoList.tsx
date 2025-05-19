@@ -1,7 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
 import { TasksContext } from '../contexts/TasksContext';
+import { AnimatePresence, motion } from 'motion/react';
 
 /**
  * To-Do list page component
@@ -39,16 +40,37 @@ interface HeaderProps {
  */
 function Header({ title }: HeaderProps) {
     const tasks = useContext(TasksContext);
+    const [animate, setAnimate] = useState(false);
+
+    useEffect(() => {
+        if (tasks.length > 0) {
+            setAnimate(true);
+            const timeout = setTimeout(() => setAnimate(false), 200);
+            return () => clearTimeout(timeout);
+        }
+    }, [tasks.length]);
 
     return (
         <div className="py-2">
             <h1 className="flex items-center">
                 <div className="font-bold text-2xl uppercase">{title}</div>
-                {tasks.length > 0 && (
-                    <span className="badge badge-accent badge-outline badge-sm mx-4">
-                        {tasks.length}
-                    </span>
-                )}
+                <AnimatePresence>
+                    {tasks.length > 0 && (
+                        <motion.span
+                            className="badge badge-accent badge-outline badge-sm mx-4"
+                            initial={{ scale: 0, opacity: 0.5 }}
+                            animate={
+                                animate
+                                    ? { scale: [1, 1.2, 1], opacity: 1 }
+                                    : { scale: 1, opacity: 1 }
+                            }
+                            exit={{ scale: 0, opacity: 0 }}
+                            transition={{ duration: 0.2, times: [0, 0.5, 1] }}
+                        >
+                            {tasks.length}
+                        </motion.span>
+                    )}
+                </AnimatePresence>
             </h1>
         </div>
     );

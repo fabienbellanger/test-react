@@ -6,6 +6,7 @@ import {
 } from '../../contexts/TasksContext';
 import { TaskActionType } from '../../hooks/useTaskReducer';
 import { MdDelete, MdInfoOutline } from 'react-icons/md';
+import { AnimatePresence, motion } from 'motion/react';
 
 /**
  * To-Do list component
@@ -17,7 +18,13 @@ export default function TaskList() {
     return (
         <div>
             {tasks.length === 0 ? (
-                <div role="alert" className="alert alert-horizontal">
+                <motion.div
+                    role="alert"
+                    className="alert alert-horizontal"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
                     <MdInfoOutline className="text-xl text-info" />
                     <div>
                         <h3 className="font-bold">No tasks available</h3>
@@ -25,13 +32,15 @@ export default function TaskList() {
                             Add a new task to get started!
                         </div>
                     </div>
-                </div>
+                </motion.div>
             ) : (
-                <ul className="divide-y divide-gray-600 mx-2">
-                    {tasks.map((task, i) => (
-                        <TaskItem key={i} task={task} index={i} />
-                    ))}
-                </ul>
+                <motion.ul className="divide-y divide-gray-600 mx-2">
+                    <AnimatePresence>
+                        {tasks.map((task) => (
+                            <MotionTaskItem key={task.id} task={task} />
+                        ))}
+                    </AnimatePresence>
+                </motion.ul>
             )}
         </div>
     );
@@ -45,34 +54,40 @@ export default function TaskList() {
  */
 interface TaskItemProps {
     task: Task;
-    index: number;
 }
 
 /**
  * Component to render each task item
  *
  */
-const TaskItem = memo(function TaskItem({ task, index }: TaskItemProps) {
+const TaskItem = memo(function TaskItem({ task }: TaskItemProps) {
     const dispatch = useContext(TasksDispatchContext);
 
     return (
-        <li className="py-2">
+        <motion.li
+            layout
+            className="py-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+        >
             <div className="flex items-center justify-between">
                 <input
-                    id={'task_' + index}
-                    name={'task_' + index}
+                    id={'task_' + task.id}
+                    name={'task_' + task.id}
                     type="checkbox"
                     checked={task.completed}
                     onChange={() =>
                         dispatch({
                             type: TaskActionType.TOGGLE_TASK,
-                            key: index,
+                            key: task.id,
                         })
                     }
                     className="checkbox checkbox-primary checkbox-md"
                 />
                 <label
-                    htmlFor={`task_${index}`}
+                    htmlFor={`task_${task.id}`}
                     className={`ml-3 rtl:mr-3 block flex-1 text-ellipsis cursor-pointer ${
                         task.completed ? 'text-gray-400 line-through' : ''
                     }`}
@@ -88,13 +103,15 @@ const TaskItem = memo(function TaskItem({ task, index }: TaskItemProps) {
                     onClick={() =>
                         dispatch({
                             type: TaskActionType.DELETE_TASK,
-                            key: index,
+                            key: task.id,
                         })
                     }
                 >
                     <MdDelete className="text-xl text-error" />
                 </button>
             </div>
-        </li>
+        </motion.li>
     );
 });
+
+const MotionTaskItem = motion.create(TaskItem);

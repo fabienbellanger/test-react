@@ -16,12 +16,12 @@ export enum TaskActionType {
  *
  * @property {TaskActionType} type Action type
  * @property {Task} payload Task object
- * @property {number} key Task index
+ * @property {string} key Task ID
  */
 export interface TaskAction {
     type: TaskActionType;
     payload?: Task;
-    key?: number;
+    key?: string;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface TaskAction {
  */
 interface TaskState {
     tasks: Task[];
-    currentIndex?: number;
+    current?: number;
 }
 
 /**
@@ -57,15 +57,15 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
         case TaskActionType.DELETE_TASK: {
             newState = {
                 ...state,
-                tasks: state.tasks.filter((_, i) => i !== action.key),
+                tasks: state.tasks.filter((task) => task.id !== action.key),
             };
             break;
         }
         case TaskActionType.TOGGLE_TASK: {
             newState = {
                 ...state,
-                tasks: state.tasks.map((task, i) =>
-                    i === action.key
+                tasks: state.tasks.map((task) =>
+                    task.id === action.key
                         ? { ...task, completed: !task.completed }
                         : task
                 ),
