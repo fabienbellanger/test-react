@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'motion/react';
  * To-Do list page component
  *
  */
-export default function TodoList() {
+export default function TodoListPage() {
     return (
         <div className="max-w-fit min-w-100 mx-auto my-16 pb-8">
             <div className="card card-border bg-base-200 overflow-hidden mx-2">

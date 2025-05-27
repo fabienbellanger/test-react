@@ -42,7 +42,7 @@ const messages = [
  * Chatbot page component
  *
  */
-export default function Chatbot() {
+export default function ChatbotPage() {
     return (
         <div className="p-4 text-gray-200">
             {messages.map((message, index) => (
