@@ -15,7 +15,7 @@ export default function DirectionToggle() {
             className="btn btn-ghost"
             onClick={() => dispatch(toggleDirection())}
         >
-            {direction === AppDirection.LTR ? 'LTR' : 'RTL'}
+            {direction === AppDirection.LTR ? 'RTL' : 'LTR'}
         </button>
     );
 }

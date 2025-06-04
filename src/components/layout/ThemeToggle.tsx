@@ -25,7 +25,7 @@ export default function ThemeToggle() {
                     animate={{ rotate: 0 }}
                     transition={{ duration: 0.4 }}
                 >
-                    <MdOutlineDarkMode className="text-base-content" />
+                    <MdOutlineLightMode className="text-yellow-500" />
                 </motion.span>
             ) : (
                 <motion.span
@@ -35,7 +35,7 @@ export default function ThemeToggle() {
                     animate={{ rotate: 0 }}
                     transition={{ duration: 0.4 }}
                 >
-                    <MdOutlineLightMode className="text-yellow-500" />
+                    <MdOutlineDarkMode className="text-base-content" />
                 </motion.span>
             )}
         </button>
