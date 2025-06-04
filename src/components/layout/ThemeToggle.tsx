@@ -23,7 +23,7 @@ export default function ThemeToggle() {
                     className="inline-block"
                     initial={{ rotate: -90 }}
                     animate={{ rotate: 0 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.6 }}
                 >
                     <MdOutlineLightMode className="text-yellow-500" />
                 </motion.span>
@@ -33,9 +33,9 @@ export default function ThemeToggle() {
                     className="inline-block"
                     initial={{ rotate: 90 }}
                     animate={{ rotate: 0 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.6 }}
                 >
-                    <MdOutlineDarkMode className="text-base-content" />
+                    <MdOutlineDarkMode className="text-blue-900" />
                 </motion.span>
             )}
         </button>

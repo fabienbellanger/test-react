@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
 import { TasksContext } from '../contexts/TasksContext';
-import { AnimatePresence, motion } from 'motion/react';
 
 /**
  * To-Do list page component
@@ -45,19 +44,11 @@ function Header({ title }: HeaderProps) {
         <div className="py-2">
             <h1 className="flex items-center">
                 <div className="font-bold text-2xl uppercase">{title}</div>
-                <AnimatePresence>
-                    {tasks.length > 0 && (
-                        <motion.span
-                            className="badge badge-accent badge-outline badge-sm mx-4"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            {tasks.length}
-                        </motion.span>
-                    )}
-                </AnimatePresence>
+                {tasks.length > 0 && (
+                    <span className="badge badge-accent badge-outline badge-sm mx-4">
+                        {tasks.length}
+                    </span>
+                )}
             </h1>
         </div>
     );
