@@ -1,5 +1,29 @@
 # React + TypeScript + Vite
 
+## Development mode
+
+```bash
+bun run dev
+deno run dev
+npm run dev
+```
+
+## Production mode (PWA)
+
+```bash
+bun run build
+deno run build
+npm run build
+```
+
+To run a preview after the build:
+
+```bash
+bun run preview
+deno run preview
+npm run preview
+```
+
 ## TODO List
 
 -   [ ] Add unit tests
