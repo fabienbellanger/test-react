@@ -22,6 +22,7 @@ type TokenResponse struct {
 	Token    string `json:"token"`
 }
 
+// To test: http post localhost:4444/token username=admin password=admin
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
@@ -42,6 +43,7 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// To test: http get localhost:4444/admin -A bearer -a mySecuredAccessToken
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)

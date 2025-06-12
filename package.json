@@ -8,12 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "server": "cd server && go run main.go"
   },
   "dependencies": {
     "@reduxjs/toolkit": "2.8.2",
     "@tailwindcss/vite": "4.1.10",
-    "motion": "12.17.0",
+    "motion": "12.17.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "5.5.0",
