@@ -18,11 +18,7 @@ export default function ErrorPage() {
                         {error.status} - {error.statusText}
                     </span>
                 ) : (
-                    <span>
-                        {error instanceof Error
-                            ? error.message
-                            : 'Unknown error'}
-                    </span>
+                    <span>{error instanceof Error ? error.message : 'Unknown error'}</span>
                 )}
             </p>
 

@@ -16,13 +16,8 @@ interface ChatbotMessageProps {
  *
  * @param {ChatbotMessageProps} props Component properties
  */
-export default function ChatbotMessage({
-    direction,
-    message,
-}: ChatbotMessageProps) {
-    const chatClasse = `chat ${
-        direction === 'start' ? 'chat-start' : 'chat-end'
-    }`;
+export default function ChatbotMessage({ direction, message }: ChatbotMessageProps) {
+    const chatClasse = `chat ${direction === 'start' ? 'chat-start' : 'chat-end'}`;
 
     const getAvatarPlaceholder = () => {
         if (message.name && message.name.trim().length > 0) {
@@ -32,9 +27,7 @@ export default function ChatbotMessage({
     };
 
     const avatarPlaceholderClass = `w-10 rounded-full ${
-        direction === 'start'
-            ? 'bg-secondary text-secondary-content'
-            : 'bg-warning text-warning-content'
+        direction === 'start' ? 'bg-secondary text-secondary-content' : 'bg-warning text-warning-content'
     }`;
 
     const renderAvatar = () => {
@@ -61,14 +54,10 @@ export default function ChatbotMessage({
             {renderAvatar()}
             <div className="chat-header">
                 {message.name}
-                {message.time && (
-                    <time className="text-xs opacity-50">{message.time}</time>
-                )}
+                {message.time && <time className="text-xs opacity-50">{message.time}</time>}
             </div>
             <div className="chat-bubble">{message.msg}</div>
-            {message.state && (
-                <div className="chat-footer opacity-50">{message.state}</div>
-            )}
+            {message.state && <div className="chat-footer opacity-50">{message.state}</div>}
         </div>
     );
 }

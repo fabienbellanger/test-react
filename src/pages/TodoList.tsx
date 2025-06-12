@@ -45,9 +45,7 @@ function Header({ title }: HeaderProps) {
             <h1 className="flex items-center">
                 <div className="font-bold text-2xl uppercase">{title}</div>
                 {tasks.length > 0 && (
-                    <span className="badge badge-accent badge-outline badge-sm mx-4">
-                        {tasks.length}
-                    </span>
+                    <span className="badge badge-accent badge-outline badge-sm mx-4">{tasks.length}</span>
                 )}
             </h1>
         </div>

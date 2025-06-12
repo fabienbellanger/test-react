@@ -1,9 +1,6 @@
 import { memo, useContext } from 'react';
 import Task from '../../models/Task';
-import {
-    TasksContext,
-    TasksDispatchContext,
-} from '../../contexts/TasksContext';
+import { TasksContext, TasksDispatchContext } from '../../contexts/TasksContext';
 import { TaskActionType } from '../../hooks/useTaskReducer';
 import { MdDelete, MdInfoOutline } from 'react-icons/md';
 import { AnimatePresence, motion } from 'motion/react';
@@ -28,9 +25,7 @@ export default function TaskList() {
                     <MdInfoOutline className="text-xl text-info" />
                     <div>
                         <h3 className="font-bold">No tasks available</h3>
-                        <div className="text-xs">
-                            Add a new task to get started!
-                        </div>
+                        <div className="text-xs">Add a new task to get started!</div>
                     </div>
                 </motion.div>
             ) : (
@@ -92,9 +87,7 @@ const TaskItem = memo(function TaskItem({ task }: TaskItemProps) {
                         task.completed ? 'text-gray-400 line-through' : ''
                     }`}
                 >
-                    <span className="block w-64 truncate overflow-hidden whitespace-nowrap">
-                        {task.title}
-                    </span>
+                    <span className="block w-64 truncate overflow-hidden whitespace-nowrap">{task.title}</span>
                 </label>
                 <button
                     type="button"

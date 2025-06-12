@@ -22,9 +22,7 @@ export default function AddTask({ placeholder }: AddTaskProps) {
     const addTask = useContext(AddTaskContext);
 
     const buttonStyle = useMemo(() => {
-        return inputValue.trim() === ''
-            ? 'btn btn-disabled'
-            : 'btn btn-soft btn-primary';
+        return inputValue.trim() === '' ? 'btn btn-disabled' : 'btn btn-soft btn-primary';
     }, [inputValue]);
 
     /**
@@ -58,7 +56,7 @@ export default function AddTask({ placeholder }: AddTaskProps) {
                 add();
             }
         },
-        [add]
+        [add],
     );
 
     /**
@@ -66,12 +64,9 @@ export default function AddTask({ placeholder }: AddTaskProps) {
      *
      * @param {React.ChangeEvent<HTMLInputElement>} e Input change event
      */
-    const handleInputChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            setInputValue(e.target.value);
-        },
-        []
-    );
+    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    }, []);
 
     return (
         <div className="w-full max-w-sm mx-auto py-2">

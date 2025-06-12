@@ -48,7 +48,7 @@ export default class Message {
         name?: string,
         avatarUrl?: string,
         time?: string,
-        state?: string
+        state?: string,
     ): Message {
         const message = new Message(msg, direction);
         message.msg = msg;

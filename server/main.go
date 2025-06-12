@@ -25,13 +25,13 @@ type TokenResponse struct {
 // To test: http post localhost:4444/token username=admin password=admin
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
 	var creds Credentials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
-		http.Error(w, "Payload invalide", http.StatusBadRequest)
+		http.Error(w, "Invalid Payload", http.StatusBadRequest)
 		return
 	}
 
@@ -46,7 +46,7 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 // To test: http get localhost:4444/admin -A bearer -a mySecuredAccessToken
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -59,10 +59,28 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Welcome to admin zone!"))
 }
 
+func CORSMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
-	http.HandleFunc("/token", tokenHandler)
-	http.HandleFunc("/admin", adminHandler)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/token", tokenHandler)
+	mux.HandleFunc("/admin", adminHandler)
+
+	app := CORSMiddleware(mux)
 
 	log.Println("Server started and listening on localhost:4444...")
-	log.Fatal(http.ListenAndServe(":4444", nil))
+	log.Fatal(http.ListenAndServe(":4444", app))
 }

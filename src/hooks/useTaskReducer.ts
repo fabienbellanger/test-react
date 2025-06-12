@@ -48,9 +48,7 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
         case TaskActionType.ADD_TASK: {
             newState = {
                 ...state,
-                tasks: action.payload
-                    ? [...state.tasks, action.payload]
-                    : state.tasks,
+                tasks: action.payload ? [...state.tasks, action.payload] : state.tasks,
             };
             break;
         }
@@ -65,9 +63,7 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
             newState = {
                 ...state,
                 tasks: state.tasks.map((task) =>
-                    task.id === action.key
-                        ? { ...task, completed: !task.completed }
-                        : task
+                    task.id === action.key ? { ...task, completed: !task.completed } : task,
                 ),
             };
             break;
@@ -110,11 +106,7 @@ export default function useTaskReducer() {
     return {
         dispatch,
         tasks: state.tasks,
-        addTask: useCallback(
-            (task: Task) =>
-                dispatch({ type: TaskActionType.ADD_TASK, payload: task }),
-            []
-        ),
+        addTask: useCallback((task: Task) => dispatch({ type: TaskActionType.ADD_TASK, payload: task }), []),
         // deleteTask: useCallback(
         //     (key: number) =>
         //         dispatch({ type: TaskActionType.DELETE_TASK, key }),

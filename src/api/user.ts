@@ -10,7 +10,7 @@ export interface GetTokenResponse {
     username: string;
 }
 
-export function getToken(req: GetTokenRequest): Promise<GetTokenResponse> {
+export function getToken(req: GetTokenRequest): Promise<GetTokenResponse | boolean> {
     return fetch(`${API_BASE_URL}/token`, {
         method: 'POST',
         headers: {
@@ -19,9 +19,9 @@ export function getToken(req: GetTokenRequest): Promise<GetTokenResponse> {
         body: JSON.stringify(req),
     }).then((response) => {
         if (!response.ok) {
-            throw new Error('Failed to fetch token');
+            return false;
         }
-        console.log(response);
+
         return response.json();
     });
 }

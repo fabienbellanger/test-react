@@ -36,11 +36,8 @@ export interface AppState {
  */
 function initialState(): AppState {
     return {
-        theme:
-            document.documentElement.getAttribute('data-theme') ??
-            AppTheme.DARK,
-        direction:
-            document.documentElement.getAttribute('dir') ?? AppDirection.LTR,
+        theme: document.documentElement.getAttribute('data-theme') ?? AppTheme.DARK,
+        direction: document.documentElement.getAttribute('dir') ?? AppDirection.LTR,
     } as AppState;
 }
 

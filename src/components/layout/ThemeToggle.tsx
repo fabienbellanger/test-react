@@ -13,10 +13,7 @@ export default function ThemeToggle() {
     const dispatch = useDispatch();
 
     return (
-        <button
-            className="btn btn-link text-xl px-2"
-            onClick={() => dispatch(toggleTheme())}
-        >
+        <button className="btn btn-link text-xl px-2" onClick={() => dispatch(toggleTheme())}>
             {theme === AppTheme.DARK ? (
                 <motion.span
                     key="dark"

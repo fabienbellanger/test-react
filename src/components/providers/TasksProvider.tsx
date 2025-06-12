@@ -1,10 +1,6 @@
 import { ReactNode } from 'react';
 import useTaskReducer from '../../hooks/useTaskReducer';
-import {
-    TasksContext,
-    TasksDispatchContext,
-    AddTaskContext,
-} from '../../contexts/TasksContext';
+import { TasksContext, TasksDispatchContext, AddTaskContext } from '../../contexts/TasksContext';
 
 /**
  * Tasks provider component properties
@@ -25,9 +21,7 @@ export default function TasksProvider({ children }: TasksProviderProps) {
     return (
         <TasksContext.Provider value={tasks}>
             <AddTaskContext.Provider value={addTask}>
-                <TasksDispatchContext.Provider value={dispatch}>
-                    {children}
-                </TasksDispatchContext.Provider>
+                <TasksDispatchContext.Provider value={dispatch}>{children}</TasksDispatchContext.Provider>
             </AddTaskContext.Provider>
         </TasksContext.Provider>
     );
