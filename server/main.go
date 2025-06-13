@@ -24,11 +24,6 @@ type TokenResponse struct {
 
 // To test: http post localhost:4444/token username=admin password=admin
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	var creds Credentials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
 		http.Error(w, "Invalid Payload", http.StatusBadRequest)
@@ -45,11 +40,6 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 
 // To test: http get localhost:4444/admin -A bearer -a mySecuredAccessToken
 func adminHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	token := r.Header.Get("Authorization")
 	if token != "Bearer "+Token {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
@@ -76,8 +66,8 @@ func CORSMiddleware(next http.Handler) http.Handler {
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/token", tokenHandler)
-	mux.HandleFunc("/admin", adminHandler)
+	mux.HandleFunc("POST /token", tokenHandler)
+	mux.HandleFunc("GET /admin", adminHandler)
 
 	app := CORSMiddleware(mux)
 
