@@ -1,10 +1,9 @@
 import { VscKey } from 'react-icons/vsc';
 import Footer from '../components/layout/Footer';
 import { HiOutlineUser } from 'react-icons/hi';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { getToken, GetTokenRequest } from '../api/user';
-import { AnimatePresence, motion } from 'motion/react';
-import { MdErrorOutline } from 'react-icons/md';
+import Toast from '../components/core/Toast';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -21,19 +20,8 @@ export default function LoginPage() {
             setError(true);
         } else {
             setError(false);
-            console.log('Login response:', response);
         }
     }, [username, password]);
-
-    useEffect(() => {
-        if (error) {
-            const timer = setTimeout(() => {
-                setError(false);
-            }, 3_000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [error]);
 
     return (
         <div className="flex flex-col min-h-screen bg-base-100">
@@ -76,23 +64,17 @@ export default function LoginPage() {
                 </div>
             </div>
 
-            <AnimatePresence>
-                {error && (
-                    <motion.div
-                        className="toast cursor-pointer"
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 100 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}
-                        onClick={() => setError(false)}
-                    >
-                        <div className="alert alert-error">
-                            <MdErrorOutline className="text-lg" />
-                            <span>Login failed! Please try again...</span>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <Toast
+                key="0"
+                visible={error}
+                duration={2_000}
+                type="error"
+                verticalPosition="bottom"
+                horizontalPosition="end"
+                onClose={() => setError(false)}
+            >
+                Login failed! Please check your username and/or password
+            </Toast>
 
             <Footer />
         </div>
