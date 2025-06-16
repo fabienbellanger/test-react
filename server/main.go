@@ -18,8 +18,10 @@ type Credentials struct {
 }
 
 type TokenResponse struct {
-	Username string `json:"username"`
-	Token    string `json:"token"`
+	Lastname  string `json:"lastname"`
+	Firstname string `json:"firstname"`
+	Username  string `json:"username"`
+	Token     string `json:"token"`
 }
 
 // To test: http post localhost:4444/token username=admin password=admin
@@ -32,7 +34,12 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 
 	if creds.Username == Username && creds.Password == Password {
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(TokenResponse{Token: Token, Username: creds.Username})
+		json.NewEncoder(w).Encode(TokenResponse{
+			Lastname:  "Doe",
+			Firstname: "John",
+			Token:     Token,
+			Username:  creds.Username,
+		})
 	} else {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}

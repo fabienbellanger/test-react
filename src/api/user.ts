@@ -6,6 +6,8 @@ export interface GetTokenRequest {
 }
 
 export interface GetTokenResponse {
+    lastname: string;
+    firstname: string;
     token: string;
     username: string;
 }

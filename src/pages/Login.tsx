@@ -2,26 +2,31 @@ import { VscKey } from 'react-icons/vsc';
 import Footer from '../components/layout/Footer';
 import { HiOutlineUser } from 'react-icons/hi';
 import { useCallback, useState } from 'react';
-import { getToken, GetTokenRequest } from '../api/user';
 import Toast from '../components/core/Toast';
+import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
-    const login = useCallback(async () => {
-        const response = await getToken({
-            username,
-            password,
-        } as GetTokenRequest);
+    const loginCall = useCallback(async () => {
+        try {
+            const result = await login(username, password);
+            setError(!result);
 
-        if (response === false) {
-            setError(true);
-        } else {
-            setError(false);
+            if (result) {
+                console.log('Login successful');
+                navigate('/todo');
+            }
+        } catch (err) {
+            console.error('Login failed:', err);
+            setError(true); // Show error toast if login fails
         }
-    }, [username, password]);
+    }, [username, password, login, navigate]);
 
     return (
         <div className="flex flex-col min-h-screen bg-base-100">
@@ -56,8 +61,8 @@ export default function LoginPage() {
                             </label>
                         </fieldset>
                         <div className="card-actions justify-end mt-4">
-                            <button className="btn btn-primary" onClick={login}>
-                                Sign in
+                            <button className="btn btn-primary" onClick={loginCall}>
+                                Connection
                             </button>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
         Component: Layout,
         errorElement: <ErrorPage />,
         children: [
-            { path: '', Component: () => <Navigate to="todo" replace /> }, // Redirection
+            { path: '', Component: () => <Navigate to="/login" replace /> }, // Redirection
             { path: 'todo', Component: TodoListPage },
             { path: 'chatbot', Component: ChatbotPage },
         ],
