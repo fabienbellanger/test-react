@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 )
 
 const (
@@ -26,6 +27,8 @@ type TokenResponse struct {
 
 // To test: http post localhost:4444/token username=admin password=admin
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(2 * time.Second) // Simulate a delay for testing purposes
+
 	var creds Credentials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
 		http.Error(w, "Invalid Payload", http.StatusBadRequest)

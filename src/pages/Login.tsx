@@ -1,32 +1,30 @@
 import { VscKey } from 'react-icons/vsc';
 import Footer from '../components/layout/Footer';
 import { HiOutlineUser } from 'react-icons/hi';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Toast from '../components/core/Toast';
 import useAuth from '../hooks/useAuth';
-import { useNavigate } from 'react-router';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const { login } = useAuth();
-    const navigate = useNavigate();
+    const { login, connected } = useAuth();
+
+    useEffect(() => {
+        connected();
+    }, [connected]);
 
     const loginCall = useCallback(async () => {
         try {
             const result = await login(username, password);
             setError(!result);
+        } catch (error) {
+            console.error('Login failed:', error);
 
-            if (result) {
-                console.log('Login successful');
-                navigate('/todo');
-            }
-        } catch (err) {
-            console.error('Login failed:', err);
-            setError(true); // Show error toast if login fails
+            setError(true);
         }
-    }, [username, password, login, navigate]);
+    }, [username, password, login]);
 
     return (
         <div className="flex flex-col min-h-screen bg-base-100">

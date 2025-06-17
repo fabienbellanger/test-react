@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router';
 import ThemeToggle from './ThemeToggle';
 import DirectionToggle from './DirectionToggle';
+import { BiLogOut } from 'react-icons/bi';
+import useAuth from '../../hooks/useAuth';
+import useUser from '../../hooks/useUser';
 
 /**
  * Navigation bar component properties
@@ -17,6 +20,8 @@ interface NavBarProps {
  * @param {NavBarProps} props Component properties
  */
 export default function NavBar({ title }: NavBarProps) {
+    const { logout } = useAuth();
+    const { fullname } = useUser();
     const navLinkActiveClass = ({
         isPending,
         isActive,
@@ -53,6 +58,13 @@ export default function NavBar({ title }: NavBarProps) {
                     <NavLink to="/chatbot" className={navLinkActiveClass}>
                         Chatbot
                     </NavLink>
+
+                    <div className="flex items-center gap-0.5">
+                        <span className="text-sm text-base-content">{fullname}</span>
+                        <button className="btn px-2" onClick={logout}>
+                            <BiLogOut className="text-lg" />
+                        </button>
+                    </div>
                 </div>
             </nav>
         </header>

@@ -23,10 +23,12 @@ export enum AppDirection {
  *
  * @property {AppTheme} theme Theme of the application (dark or light)
  * @property {AppDirection} direction Direction of the application (ltr or rtl)
+ * @property {boolean} loading Loading state of the application
  */
 export interface AppState {
     theme: AppTheme;
     direction: AppDirection;
+    loading: boolean;
 }
 
 /**
@@ -38,6 +40,7 @@ function initialState(): AppState {
     return {
         theme: document.documentElement.getAttribute('data-theme') ?? AppTheme.DARK,
         direction: document.documentElement.getAttribute('dir') ?? AppDirection.LTR,
+        loading: false,
     } as AppState;
 }
 
@@ -75,6 +78,14 @@ const AppToogleDirection = (state: AppState) => {
     document.documentElement.setAttribute('dir', newDirection);
 };
 
+const StartLoading = (state: AppState) => {
+    state.loading = true;
+};
+
+const StopLoading = (state: AppState) => {
+    state.loading = false;
+};
+
 /**
  * Application store
  *
@@ -85,8 +96,10 @@ export const AppStore = createSlice({
     reducers: {
         toggleTheme: AppToggleTheme,
         toggleDirection: AppToogleDirection,
+        startLoading: StartLoading,
+        stopLoading: StopLoading,
     },
 });
 
 // Export store actions
-export const { toggleTheme, toggleDirection } = AppStore.actions;
+export const { toggleTheme, toggleDirection, startLoading, stopLoading } = AppStore.actions;
