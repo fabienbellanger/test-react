@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router';
-import ChatbotPage from './pages/Chatbot';
-import TodoListPage from './pages/TodoList';
+import ChatbotPage from './pages/ChatbotPage';
+import TodoListPage from './pages/TodoListPage';
 import Layout from './components/layout/Layout';
-import ErrorPage from './pages/Error';
-import LoginPage from './pages/Login';
+import ErrorPage from './pages/ErrorPage';
+import LoginPage from './pages/LoginPage';
 import AuthGuard from './components/layout/AuthGuard';
 
 export const HOMEPAGE = '/';
