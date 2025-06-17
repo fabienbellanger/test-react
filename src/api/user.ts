@@ -1,4 +1,5 @@
 import { API_BASE_URL } from './config';
+import { FetchAPI, FetchAPIMethod } from './fetch';
 
 export interface GetTokenRequest {
     username: string;
@@ -12,18 +13,15 @@ export interface GetTokenResponse {
     username: string;
 }
 
-export function getToken(req: GetTokenRequest): Promise<GetTokenResponse | boolean> {
-    return fetch(`${API_BASE_URL}/token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(req),
-    }).then((response) => {
-        if (!response.ok) {
-            return false;
-        }
+/**
+ * Get user token from the server
+ *
+ *  @param {GetTokenRequest} req Request parameters containing username and password
+ *  @returns {Promise<GetTokenResponse>} Promise resolving to the user token and details
+ *  @throws {FetchAPIError}
+ */
+export async function getToken(req: GetTokenRequest): Promise<GetTokenResponse> {
+    const request = new FetchAPI<GetTokenRequest>(`${API_BASE_URL}/token`, FetchAPIMethod.POST, req);
 
-        return response.json();
-    });
+    return await request.sendJson<GetTokenResponse>();
 }

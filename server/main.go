@@ -59,6 +59,10 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Welcome to admin zone!"))
 }
 
+func unauthorizedHandler(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "Unauthorized", http.StatusUnauthorized)
+}
+
 func CORSMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -78,6 +82,7 @@ func main() {
 
 	mux.HandleFunc("POST /token", tokenHandler)
 	mux.HandleFunc("GET /admin", adminHandler)
+	mux.HandleFunc("GET /401", unauthorizedHandler)
 
 	app := CORSMiddleware(mux)
 
