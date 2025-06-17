@@ -13,6 +13,7 @@ export default defineConfig({
             includeAssets: ['img/**/*'],
             manifest: {
                 name: 'Test React',
+                description: 'A test React application with PWA support',
                 short_name: 'TestReact',
                 start_url: '/',
                 display: 'standalone',
@@ -34,8 +35,7 @@ export default defineConfig({
             workbox: {
                 runtimeCaching: [
                     {
-                        urlPattern:
-                            /^https:\/\/.*\/.*\.(png|jpg|jpeg|webp|svg|gif)$/,
+                        urlPattern: /^https:\/\/.*\/.*\.(png|jpg|jpeg|webp|svg|gif)$/,
                         handler: 'CacheFirst',
                         options: {
                             cacheName: 'external-images',
