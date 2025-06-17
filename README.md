@@ -26,9 +26,10 @@ npm run preview
 
 ## TODO List
 
-- [ ] Add a fetch helper
-- [ ] Add login (hooks, storage, etc.)
+- [ ] Add internationalization
 - [ ] Add unit tests
+- [x] Add a fetch helper
+- [x] Add login (hooks, storage, etc.)
 - [x] Add a custom Toast component (done but not fully useful)
 - [x] Add theme toogle (dark / light)
 - [x] Add state management

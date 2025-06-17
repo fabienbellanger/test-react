@@ -6,7 +6,7 @@ import { UserStore, UserState } from './UserStore';
  * Global state
  *
  * @property {AppState} app Application state
- *  @property {UserState} user User state
+ * @property {UserState} user User state
  */
 export interface GlobalState {
     app: AppState;

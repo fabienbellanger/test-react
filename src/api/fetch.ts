@@ -70,7 +70,7 @@ export class FetchAPI<T> {
                 throw error;
             }
             throw new FetchAPIError(
-                'FetchAPI Network Error',
+                'network error',
                 500,
                 typeof error === 'object' && error !== null && 'toString' in error
                     ? (error as { toString: () => string }).toString()
@@ -109,7 +109,7 @@ export class FetchAPIError extends Error {
     statusCode: number;
 
     constructor(message: string, statusCode: number, response: string) {
-        super(`${message}: ${response}`);
+        super(`[${message}] ${response}`);
         this.statusCode = statusCode;
     }
 

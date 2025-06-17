@@ -19,7 +19,7 @@ export default function useAuth() {
      * @param {string} username Username
      * @param {string} password Password
      */
-    const login = async (username: string, password: string): Promise<boolean> => {
+    const login = async (username: string, password: string) => {
         try {
             dispatch(startLoading());
 
@@ -31,14 +31,10 @@ export default function useAuth() {
             dispatch(setUser(response));
 
             navigate(HOMEPAGE, { replace: true });
-
-            return true;
         } catch (error) {
-            console.error(error);
-
             dispatch(clearUser());
 
-            return false;
+            throw error;
         } finally {
             dispatch(stopLoading());
         }

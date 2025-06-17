@@ -4,7 +4,7 @@ import TodoListPage from './pages/TodoListPage';
 import Layout from './components/layout/Layout';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
-import AuthGuard from './components/layout/AuthGuard';
+import AuthGuard from './components/core/AuthGuard';
 
 export const HOMEPAGE = '/';
 
@@ -15,6 +15,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
+        // Protected routes
         path: '/',
         Component: () => (
             <AuthGuard>

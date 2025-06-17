@@ -3,6 +3,7 @@
     themes:
         'light' --default,
         'dark' --prefersdark;
+    exclude: rootscrollgutter;
 }
 @plugin 'daisyui/theme' {
     name: 'dark';

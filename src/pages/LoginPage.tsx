@@ -8,7 +8,7 @@ import useAuth from '../hooks/useAuth';
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
     const { login, redirectToHomeIfAuthenticated } = useAuth();
 
     // Redirect to home page if already authenticated
@@ -22,12 +22,11 @@ export default function LoginPage() {
             e.stopPropagation();
 
             try {
-                const result = await login(username, password);
-                setError(!result);
-            } catch (error) {
-                console.error(error);
+                await login(username, password);
 
-                setError(true);
+                setError('');
+            } catch (error) {
+                setError(error instanceof Error ? error.message : 'An unexpected error occurred');
             }
         },
         [username, password, login],
@@ -75,17 +74,16 @@ export default function LoginPage() {
                     </div>
                 </div>
             </div>
-
             <Toast
                 key="0"
-                visible={error}
-                duration={2_000}
+                visible={error !== ''}
+                duration={3_000}
                 type="error"
                 verticalPosition="bottom"
                 horizontalPosition="end"
-                onClose={() => setError(false)}
+                onClose={() => setError('')}
             >
-                Login failed! Please check your username and/or password
+                {error}
             </Toast>
 
             <Footer />

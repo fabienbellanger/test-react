@@ -27,7 +27,7 @@ type TokenResponse struct {
 
 // To test: http post localhost:4444/token username=admin password=admin
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(2 * time.Second) // Simulate a delay for testing purposes
+	time.Sleep(1 * time.Second) // Simulate a delay for testing purposes
 
 	var creds Credentials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
@@ -50,6 +50,8 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 
 // To test: http get localhost:4444/admin -A bearer -a mySecuredAccessToken
 func adminHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(1 * time.Second) // Simulate a delay for testing purposes
+
 	token := r.Header.Get("Authorization")
 	if token != "Bearer "+Token {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
@@ -60,6 +62,8 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func unauthorizedHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(1 * time.Second) // Simulate a delay for testing purposes
+
 	http.Error(w, "Unauthorized", http.StatusUnauthorized)
 }
 

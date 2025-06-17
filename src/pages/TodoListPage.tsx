@@ -27,6 +27,7 @@ export default function TodoListPage() {
                                     undefined,
                                     true,
                                 ),
+                                'admin page',
                             );
                             console.log(res);
                         } catch (error) {
@@ -48,6 +49,7 @@ export default function TodoListPage() {
                                     undefined,
                                     true,
                                 ),
+                                '401 page',
                             );
                         } catch (error) {
                             console.error(error);
