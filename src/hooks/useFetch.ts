@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 export default function useFetch() {
     const { logout } = useAuth();
 
-    const sendJson = async <T>(req: FetchAPI<T>) => {
+    const sendJSON = async <T>(req: FetchAPI<T>) => {
         try {
             return await req.sendJSON<T>('test401');
         } catch (error) {
@@ -17,7 +17,21 @@ export default function useFetch() {
         }
     };
 
+    const sendText = async <T>(req: FetchAPI<T>) => {
+        try {
+            return await req.sendText<T>('test401');
+        } catch (error) {
+            if (error instanceof FetchAPIError) {
+                if (error.unauthorized()) {
+                    logout();
+                }
+            }
+            throw error;
+        }
+    };
+
     return {
-        sendJson,
+        sendJson: sendJSON,
+        sendText,
     };
 }

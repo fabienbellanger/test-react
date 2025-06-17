@@ -67,7 +67,7 @@ export default function LoginPage() {
                                 </label>
                             </fieldset>
                             <div className="card-actions justify-end mt-4">
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" className="btn btn-primary" disabled={!username || !password}>
                                     Connection
                                 </button>
                             </div>

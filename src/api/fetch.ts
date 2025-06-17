@@ -19,6 +19,7 @@ export class FetchAPI<T> {
     method: FetchAPIMethod;
     body?: T;
     headers: Record<string, string>;
+    credentials?: boolean;
 
     /**
      * Constructor for FetchAPI
@@ -27,8 +28,16 @@ export class FetchAPI<T> {
      * @param {FetchAPIMethod} method  HTTP method
      * @param {T} body Body
      * @param {Record<string, string>} headers Headers
+     * @param {boolean} credentials Whether to include credentials (default: false)
+     * @throws {FetchAPIError} Throws an error if the request fails
      */
-    constructor(url: string, method: FetchAPIMethod, body?: T, headers?: Record<string, string>) {
+    constructor(
+        url: string,
+        method: FetchAPIMethod,
+        body?: T,
+        headers?: Record<string, string>,
+        credentials: boolean = false,
+    ) {
         this.url = url;
         this.method = method;
         this.body = body;
@@ -36,15 +45,14 @@ export class FetchAPI<T> {
             'Content-Type': 'application/json',
             ...headers,
         };
+
+        const token = sessionStorage.getItem('token');
+        if (credentials && token && token.length > 0) {
+            this.headers['Authorization'] = `Bearer ${token}`;
+        }
     }
 
-    /**
-     * Sends a JSON request to the specified URL
-     *
-     * @param {string} errorName Name of the error for logging
-     * @returns {Promise<R>} Promise resolving to the response data
-     */
-    async sendJSON<R>(errorName: string = 'sendJSON'): Promise<R> {
+    private async send<R>(type: 'json' | 'text', errorName: string = 'sendJSON'): Promise<R> {
         try {
             const response = await fetch(this.url, {
                 method: this.method,
@@ -56,7 +64,7 @@ export class FetchAPI<T> {
                 throw new FetchAPIError(errorName, response.status, await response.text());
             }
 
-            return response.json() as Promise<R>;
+            return type === 'json' ? response.json() : (response.text() as Promise<R>);
         } catch (error) {
             if (error instanceof FetchAPIError) {
                 throw error;
@@ -69,6 +77,26 @@ export class FetchAPI<T> {
                     : String(error) || 'Unknown error',
             );
         }
+    }
+
+    /**
+     * Sends a JSON request to the specified URL
+     *
+     * @param {string} errorName Name of the error for logging
+     * @returns {Promise<R>} Promise resolving to the response data
+     */
+    async sendJSON<R>(errorName: string = 'sendJSON'): Promise<R> {
+        return this.send('json', errorName);
+    }
+
+    /**
+     * Sends a text request to the specified URL
+     *
+     * @param {string} errorName Name of the error for logging
+     * @returns {Promise<R>} Promise resolving to the response data
+     */
+    async sendText<R>(errorName: string = 'sendText'): Promise<R> {
+        return this.send('text', errorName);
     }
 }
 

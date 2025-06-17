@@ -59,13 +59,9 @@ export default function useAuth() {
      *
      */
     const isAuthenticated = () => {
-        const userSession = sessionStorage.getItem('user');
-        if (userSession) {
-            const user = JSON.parse(userSession);
+        const token = sessionStorage.getItem('token');
 
-            return user && user.token && user.token.length > 0;
-        }
-        return false;
+        return token && token.length > 0;
     };
 
     /**

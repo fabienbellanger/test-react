@@ -10,22 +10,53 @@ import { FetchAPI, FetchAPIMethod } from '../api/fetch';
  *
  */
 export default function TodoListPage() {
-    const { sendJson } = useFetch();
+    const { sendText } = useFetch();
 
     return (
         <div className="max-w-fit min-w-100 mx-auto my-16 pb-8">
-            <button
-                className="btn btn-primary btn-sm mb-4"
-                onClick={async () => {
-                    try {
-                        await sendJson(new FetchAPI('http://localhost:4444/401', FetchAPIMethod.GET));
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }}
-            >
-                Trigger 401 Error
-            </button>
+            <div className="flex flex-row justify-center items-center gap-2 ">
+                <button
+                    className="btn btn-dash btn-accent btn-sm mb-4"
+                    onClick={async () => {
+                        try {
+                            const res = await sendText(
+                                new FetchAPI(
+                                    'http://localhost:4444/admin',
+                                    FetchAPIMethod.GET,
+                                    undefined,
+                                    undefined,
+                                    true,
+                                ),
+                            );
+                            console.log(res);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }}
+                >
+                    Admin route
+                </button>
+                <button
+                    className="btn btn-dash btn-primary btn-sm mb-4"
+                    onClick={async () => {
+                        try {
+                            await sendText(
+                                new FetchAPI(
+                                    'http://localhost:4444/401',
+                                    FetchAPIMethod.GET,
+                                    undefined,
+                                    undefined,
+                                    true,
+                                ),
+                            );
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }}
+                >
+                    Trigger 401 Error
+                </button>
+            </div>
 
             <div className="card card-border bg-base-200 overflow-hidden mx-2">
                 <div className="card-body">

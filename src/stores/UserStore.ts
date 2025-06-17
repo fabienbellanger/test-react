@@ -50,7 +50,8 @@ export const UserStore = createSlice({
             state.firstname = firstname;
             state.token = token;
 
-            sessionStorage.setItem('user', JSON.stringify(state));
+            sessionStorage.setItem('user', JSON.stringify({ lastname, firstname }));
+            sessionStorage.setItem('token', token);
         },
         clearUser: (state) => {
             state.lastname = undefined;
@@ -58,6 +59,7 @@ export const UserStore = createSlice({
             state.token = undefined;
 
             sessionStorage.removeItem('user');
+            sessionStorage.removeItem('token');
         },
     },
 });
