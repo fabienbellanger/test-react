@@ -10,6 +10,8 @@ export enum FetchAPIMethod {
     TRACE = 'TRACE',
 }
 
+const UNKNOWN_ERROR = 'unknown error';
+
 /**
  * FetchAPI class for making HTTP requests
  *
@@ -46,13 +48,14 @@ export class FetchAPI<T> {
             ...headers,
         };
 
+        // Set credentials
         const token = sessionStorage.getItem('token');
         if (credentials && token && token.length > 0) {
             this.headers['Authorization'] = `Bearer ${token}`;
         }
     }
 
-    private async send<R>(type: 'json' | 'text', errorName: string = 'sendJSON'): Promise<R> {
+    private async send<R>(type: 'json' | 'text', errorName: string = UNKNOWN_ERROR): Promise<R> {
         try {
             const response = await fetch(this.url, {
                 method: this.method,
@@ -74,7 +77,7 @@ export class FetchAPI<T> {
                 500,
                 typeof error === 'object' && error !== null && 'toString' in error
                     ? (error as { toString: () => string }).toString()
-                    : String(error) || 'Unknown error',
+                    : String(error) || UNKNOWN_ERROR,
             );
         }
     }
@@ -85,7 +88,7 @@ export class FetchAPI<T> {
      * @param {string} errorName Name of the error for logging
      * @returns {Promise<R>} Promise resolving to the response data
      */
-    async sendJSON<R>(errorName: string = 'sendJSON'): Promise<R> {
+    async sendJSON<R>(errorName: string = UNKNOWN_ERROR): Promise<R> {
         return this.send('json', errorName);
     }
 
@@ -95,7 +98,7 @@ export class FetchAPI<T> {
      * @param {string} errorName Name of the error for logging
      * @returns {Promise<R>} Promise resolving to the response data
      */
-    async sendText<R>(errorName: string = 'sendText'): Promise<R> {
+    async sendText<R>(errorName: string = UNKNOWN_ERROR): Promise<R> {
         return this.send('text', errorName);
     }
 }
@@ -113,14 +116,38 @@ export class FetchAPIError extends Error {
         this.statusCode = statusCode;
     }
 
+    /**
+     * Checks if the error is unauthorized (HTTP 401)
+     *
+     * @returns {boolean} True if the error is unauthorized, false otherwise
+     */
     unauthorized(): boolean {
         return this.statusCode === 401;
     }
 
+    /**
+     * Checks if the error is forbidden (HTTP 403)
+     *
+     * @returns {boolean} True if the error is forbidden, false otherwise
+     */
     notFound(): boolean {
         return this.statusCode === 404;
     }
 
+    /**
+     * Checks if the error is a bad request (HTTP 400)
+     *
+     * @returns {boolean} True if the error is a bad request, false otherwise
+     */
+    badRequest(): boolean {
+        return this.statusCode === 400;
+    }
+
+    /**
+     * Checks if the error is a server error (HTTP 500)
+     *
+     * @returns {boolean} True if the error is a server error, false otherwise
+     */
     serverError(): boolean {
         return this.statusCode >= 500 && this.statusCode < 600;
     }
