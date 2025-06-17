@@ -41,9 +41,10 @@ export class FetchAPI<T> {
     /**
      * Sends a JSON request to the specified URL
      *
+     * @param {string} errorName Name of the error for logging
      * @returns {Promise<R>} Promise resolving to the response data
      */
-    async sendJson<R>(): Promise<R> {
+    async sendJSON<R>(errorName: string = 'sendJSON'): Promise<R> {
         try {
             const response = await fetch(this.url, {
                 method: this.method,
@@ -52,7 +53,7 @@ export class FetchAPI<T> {
             });
 
             if (!response.ok) {
-                throw new FetchAPIError('FetchAPIError', response.status, await response.text());
+                throw new FetchAPIError(errorName, response.status, await response.text());
             }
 
             return response.json() as Promise<R>;

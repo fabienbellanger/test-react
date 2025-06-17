@@ -23,5 +23,5 @@ export interface GetTokenResponse {
 export async function getToken(req: GetTokenRequest): Promise<GetTokenResponse> {
     const request = new FetchAPI<GetTokenRequest>(`${API_BASE_URL}/token`, FetchAPIMethod.POST, req);
 
-    return await request.sendJson<GetTokenResponse>();
+    return await request.sendJSON<GetTokenResponse>('getToken');
 }

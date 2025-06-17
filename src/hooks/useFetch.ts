@@ -6,7 +6,7 @@ export default function useFetch() {
 
     const sendJson = async <T>(req: FetchAPI<T>) => {
         try {
-            return await req.sendJson<T>();
+            return await req.sendJSON<T>('test401');
         } catch (error) {
             if (error instanceof FetchAPIError) {
                 if (error.unauthorized()) {
