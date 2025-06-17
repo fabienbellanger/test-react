@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { startLoading, stopLoading } from '../stores/AppStore';
 import { clearUser, setUser } from '../stores/UserStore';
 import { useNavigate } from 'react-router';
-
-const HOME_ROUTE = '/todo';
+import { HOMEPAGE } from '../Router';
 
 /**
  * Auth hook
@@ -14,6 +13,12 @@ export default function useAuth() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    /**
+     * Login authenticates the user with the provided credentials
+     *
+     * @param {string} username Username
+     * @param {string} password Password
+     */
     const login = async (username: string, password: string): Promise<boolean> => {
         try {
             dispatch(startLoading());
@@ -25,7 +30,7 @@ export default function useAuth() {
 
             dispatch(setUser(response));
 
-            navigate(HOME_ROUTE, { replace: true });
+            navigate(HOMEPAGE, { replace: true });
 
             return true;
         } catch (error) {
@@ -39,12 +44,20 @@ export default function useAuth() {
         }
     };
 
+    /**
+     * Logout clears the user session and redirects to the login page
+     *
+     */
     const logout = () => {
         dispatch(clearUser());
 
         navigate('/login', { replace: true });
     };
 
+    /**
+     * Checks if the user is authenticated
+     *
+     */
     const isAuthenticated = () => {
         const userSession = sessionStorage.getItem('user');
         if (userSession) {
@@ -55,9 +68,13 @@ export default function useAuth() {
         return false;
     };
 
+    /**
+     * Redirects to the home page if the user is authenticated
+     *
+     */
     const redirectToHomeIfAuthenticated = () => {
         if (isAuthenticated()) {
-            navigate(HOME_ROUTE, { replace: true });
+            navigate(HOMEPAGE, { replace: true });
         }
     };
 
