@@ -8,9 +8,8 @@ export default function useFetch() {
     const dispatch = useDispatch();
 
     const sendJSON = async <T>(req: FetchAPI<T>, errorName?: string) => {
-        dispatch(startLoading());
-
         try {
+            dispatch(startLoading());
             return await req.sendJSON<T>(errorName);
         } catch (error) {
             if (error instanceof FetchAPIError) {
@@ -26,9 +25,8 @@ export default function useFetch() {
     };
 
     const sendText = async <T>(req: FetchAPI<T>, errorName?: string) => {
-        dispatch(startLoading());
-
         try {
+            dispatch(startLoading());
             return await req.sendText<T>(errorName);
         } catch (error) {
             if (error instanceof FetchAPIError) {

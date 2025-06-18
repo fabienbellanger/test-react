@@ -43,6 +43,27 @@ export default function TodoListPage() {
                         try {
                             await sendText(
                                 new FetchAPI(
+                                    'http://localhost:4444/204',
+                                    FetchAPIMethod.GET,
+                                    undefined,
+                                    undefined,
+                                    true,
+                                ),
+                                '204 page',
+                            );
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }}
+                >
+                    Trigger 204
+                </button>
+                <button
+                    className="btn btn-dash btn-warning btn-sm mb-4"
+                    onClick={async () => {
+                        try {
+                            await sendText(
+                                new FetchAPI(
                                     'http://localhost:4444/401',
                                     FetchAPIMethod.GET,
                                     undefined,
@@ -56,7 +77,7 @@ export default function TodoListPage() {
                         }
                     }}
                 >
-                    Trigger 401 Error
+                    Trigger 401
                 </button>
             </div>
 

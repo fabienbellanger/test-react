@@ -62,9 +62,15 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func unauthorizedHandler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(1 * time.Second) // Simulate a delay for testing purposes
+	time.Sleep(400 * time.Millisecond) // Simulate a delay for testing purposes
 
 	http.Error(w, "Unauthorized", http.StatusUnauthorized)
+}
+
+func noContentHandler(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(400 * time.Millisecond) // Simulate a delay for testing purposes
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func CORSMiddleware(next http.Handler) http.Handler {
@@ -87,6 +93,7 @@ func main() {
 	mux.HandleFunc("POST /token", tokenHandler)
 	mux.HandleFunc("GET /admin", adminHandler)
 	mux.HandleFunc("GET /401", unauthorizedHandler)
+	mux.HandleFunc("GET /204", noContentHandler)
 
 	app := CORSMiddleware(mux)
 
