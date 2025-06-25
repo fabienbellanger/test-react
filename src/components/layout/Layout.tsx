@@ -12,6 +12,7 @@ export default function Layout() {
         <TasksProvider>
             <div className="flex flex-col min-h-screen bg-base-100">
                 <NavBar title="My React App" />
+
                 <Outlet />
 
                 <Footer />

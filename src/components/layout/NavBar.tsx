@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { useNavigate } from 'react-router';
 import ThemeToggle from './ThemeToggle';
 import DirectionToggle from './DirectionToggle';
 import { BiLogOut } from 'react-icons/bi';
@@ -22,27 +22,15 @@ interface NavBarProps {
 export default function NavBar({ title }: NavBarProps) {
     const { logout } = useAuth();
     const { fullname } = useUser();
-    const navLinkActiveClass = ({
-        isPending,
-        isActive,
-        isTransitioning,
-    }: {
-        isPending: boolean;
-        isActive: boolean;
-        isTransitioning: boolean;
-    }) => {
-        if (isPending || isTransitioning) {
-            return 'btn btn-soft btn-disabled';
-        } else if (isActive) {
-            return 'btn btn-soft btn-primary';
-        }
-        return 'btn btn-soft btn-outline';
-    };
+    const navigate = useNavigate();
 
     return (
         <header>
             <nav className="navbar bg-base-200 shadow-sm flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => navigate('/', { replace: true })}
+                >
                     <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
                     <h1 className="text-2xl text-ellipsis whitespace-nowrap overflow-hidden">{title}</h1>
                 </div>
@@ -50,14 +38,6 @@ export default function NavBar({ title }: NavBarProps) {
                     <ThemeToggle />
 
                     <DirectionToggle />
-
-                    <NavLink to="/todo" className={navLinkActiveClass}>
-                        To-Do List
-                    </NavLink>
-
-                    <NavLink to="/chatbot" className={navLinkActiveClass}>
-                        Chatbot
-                    </NavLink>
 
                     <div className="flex items-center gap-0.5">
                         <span className="text-sm text-base-content">{fullname}</span>

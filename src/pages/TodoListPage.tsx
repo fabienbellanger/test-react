@@ -1,55 +1,15 @@
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import AddTask from '../components/todo_list/AddTask';
 import TaskList from '../components/todo_list/TaskList';
 import { TasksContext } from '../contexts/TasksContext';
-import useFetch from '../hooks/useFetch';
-import { FetchAPI, FetchAPIMethod } from '../api/fetch';
 
 /**
  * To-Do list page component
  *
  */
 export default function TodoListPage() {
-    const { sendText } = useFetch();
-
-    const test = useCallback(
-        async (url: string) => {
-            try {
-                const res = await sendText(
-                    new FetchAPI(url, FetchAPIMethod.GET, undefined, undefined, true),
-                    'admin page',
-                );
-                console.log(res);
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        [sendText],
-    );
-
     return (
         <div className="max-w-fit min-w-100 mx-auto my-16 pb-8">
-            <div className="flex flex-row justify-center items-center gap-2 ">
-                <button
-                    className="btn btn-dash btn-accent btn-sm mb-4"
-                    onClick={() => test('http://localhost:4444/admin')}
-                >
-                    Admin route
-                </button>
-                <button
-                    className="btn btn-dash btn-primary btn-sm mb-4"
-                    onClick={() => test('http://localhost:4444/204')}
-                >
-                    Trigger 204
-                </button>
-                <button
-                    className="btn btn-dash btn-warning btn-sm mb-4"
-                    onClick={() => test('http://localhost:4444/401')}
-                >
-                    Trigger 401
-                </button>
-            </div>
-
             <div className="card card-border bg-base-200 overflow-hidden mx-2">
                 <div className="card-body">
                     <Header title="To-Do List" />
