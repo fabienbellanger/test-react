@@ -37,7 +37,7 @@ const messages = [
  */
 export default function ChatbotPage() {
     return (
-        <div className="p-4 text-gray-200">
+        <div className="p-4">
             {messages.map((message, index) => (
                 <ChatbotMessage key={index} direction={message.direction} message={message} />
             ))}
