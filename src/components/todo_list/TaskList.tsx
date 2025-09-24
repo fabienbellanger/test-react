@@ -4,6 +4,9 @@ import { TasksContext, TasksDispatchContext } from '../../contexts/TasksContext'
 import { TaskActionType } from '../../hooks/useTaskReducer';
 import { MdDelete, MdInfoOutline } from 'react-icons/md';
 import { AnimatePresence, motion } from 'motion/react';
+import { useSelector } from 'react-redux';
+import { GlobalState } from '../../stores';
+import { AppTheme } from '../../stores/AppStore';
 
 /**
  * To-Do list component
@@ -11,6 +14,8 @@ import { AnimatePresence, motion } from 'motion/react';
  */
 export default function TaskList() {
     const tasks = useContext(TasksContext);
+    const theme = useSelector((state: GlobalState) => state.app.theme);
+    const divideClass = `divide-y  ${theme === AppTheme.DARK ? 'divide-gray-600' : 'divide-gray-300'} mx-2`;
 
     return (
         <div>
@@ -29,7 +34,7 @@ export default function TaskList() {
                     </div>
                 </motion.div>
             ) : (
-                <motion.ul className="divide-y divide-gray-600 mx-2">
+                <motion.ul className={divideClass}>
                     <AnimatePresence>
                         {tasks.map((task) => (
                             <MotionTaskItem key={task.id} task={task} />
