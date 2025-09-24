@@ -99,7 +99,11 @@ export const AppStore = createSlice({
         startLoading: StartLoading,
         stopLoading: StopLoading,
     },
+    selectors: {
+        isDarkTheme: (state: AppState) => state.theme === AppTheme.DARK,
+    },
 });
 
 // Export store actions
 export const { toggleTheme, toggleDirection, startLoading, stopLoading } = AppStore.actions;
+export const { isDarkTheme } = AppStore.selectors;

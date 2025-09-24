@@ -5,8 +5,7 @@ import { TaskActionType } from '../../hooks/useTaskReducer';
 import { MdDelete, MdInfoOutline } from 'react-icons/md';
 import { AnimatePresence, motion } from 'motion/react';
 import { useSelector } from 'react-redux';
-import { GlobalState } from '../../stores';
-import { AppTheme } from '../../stores/AppStore';
+import { isDarkTheme } from '../../stores/AppStore';
 
 /**
  * To-Do list component
@@ -14,8 +13,8 @@ import { AppTheme } from '../../stores/AppStore';
  */
 export default function TaskList() {
     const tasks = useContext(TasksContext);
-    const theme = useSelector((state: GlobalState) => state.app.theme);
-    const divideClass = `divide-y  ${theme === AppTheme.DARK ? 'divide-gray-600' : 'divide-gray-300'} mx-2`;
+    const darkTheme = useSelector(isDarkTheme);
+    const divideClass = `divide-y  ${darkTheme ? 'divide-gray-600' : 'divide-gray-300'} mx-2`;
 
     return (
         <div>
