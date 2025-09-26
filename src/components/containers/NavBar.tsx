@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import ThemeToggle from './ThemeToggle';
 import DirectionToggle from './DirectionToggle';
-import { BiLogOut } from 'react-icons/bi';
+import { BiLogOut, BiMenu } from 'react-icons/bi';
 import useAuth from '../../hooks/useAuth';
 import useUser from '../../hooks/useUser';
 
@@ -31,6 +31,10 @@ export default function NavBar({ title }: NavBarProps) {
                     className="flex items-center gap-2 cursor-pointer"
                     onClick={() => navigate('/', { replace: true })}
                 >
+                    {/* Menu toogle for mobile view or small screen */}
+                    <label htmlFor="left-sidebar-drawer" className="btn btn-circle xl:hidden">
+                        <BiMenu className="inline-block h-7 w-7" />
+                    </label>
                     <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
                     <h1 className="text-2xl text-ellipsis whitespace-nowrap overflow-hidden">{title}</h1>
                 </div>

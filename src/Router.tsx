@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import ChatbotPage from './pages/ChatbotPage';
 import TodoListPage from './pages/TodoListPage';
-import Layout from './components/layout/Layout';
+import Layout from './components/containers/Layout';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
 import AuthGuard from './components/core/AuthGuard';

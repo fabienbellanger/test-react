@@ -1,5 +1,5 @@
 import { VscKey } from 'react-icons/vsc';
-import Footer from '../components/layout/Footer';
+import Footer from '../components/containers/Footer';
 import { HiOutlineUser } from 'react-icons/hi';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import Toast from '../components/core/Toast';

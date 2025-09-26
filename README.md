@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+See [Dashboard](https://github.com/robbins23/daisyui-admin-dashboard-template)
+
 ## Development mode
 
 ```bash
