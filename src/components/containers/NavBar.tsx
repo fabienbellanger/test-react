@@ -27,16 +27,17 @@ export default function NavBar({ title }: NavBarProps) {
     return (
         <header>
             <nav className="navbar bg-base-200 shadow-sm flex items-center justify-between">
-                <div
-                    className="flex items-center gap-2 cursor-pointer"
-                    onClick={() => navigate('/', { replace: true })}
-                >
-                    {/* Menu toogle for mobile view or small screen */}
+                <div className="flex items-center gap-2">
                     <label htmlFor="left-sidebar-drawer" className="btn btn-circle xl:hidden">
                         <BiMenu className="inline-block h-7 w-7" />
                     </label>
-                    <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
-                    <h1 className="text-2xl text-ellipsis whitespace-nowrap overflow-hidden">{title}</h1>
+                    <div
+                        className="flex items-center gap-2 cursor-pointer"
+                        onClick={() => navigate('/', { replace: true })}
+                    >
+                        <img src="/img/vite.svg" alt="Logo" className="h-6 w-6" />
+                        <h1 className="text-2xl text-ellipsis whitespace-nowrap overflow-hidden">{title}</h1>
+                    </div>
                 </div>
                 <div className="flex items-center justify-end gap-2">
                     <ThemeToggle />

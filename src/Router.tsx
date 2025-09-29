@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
 import AuthGuard from './components/core/AuthGuard';
 import HomePage from './pages/HomePage';
+import RoadmapPage from './pages/RoadmapPage';
 
 export const HOMEPAGE = '/';
 
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
             { path: '', Component: HomePage },
             { path: 'todo', Component: TodoListPage },
             { path: 'chatbot', Component: ChatbotPage },
+            { path: 'roadmap', Component: RoadmapPage },
         ],
     },
 ]);

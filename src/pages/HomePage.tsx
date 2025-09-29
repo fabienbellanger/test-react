@@ -33,6 +33,10 @@ export default function HomePage() {
                 <Link to="/chatbot" className="btn btn-soft btn-outline">
                     Chatbot
                 </Link>
+
+                <Link to="/roadmap" className="btn btn-soft btn-outline">
+                    Roadmap
+                </Link>
             </section>
 
             <div className="flex flex-row justify-center items-center gap-2 ">

@@ -4,34 +4,34 @@
     "": {
       "name": "test-react",
       "dependencies": {
-        "@reduxjs/toolkit": "2.9.0",
-        "@tailwindcss/vite": "4.1.13",
-        "motion": "12.23.22",
-        "react": "19.1.1",
-        "react-dom": "19.1.1",
-        "react-icons": "5.5.0",
-        "react-redux": "9.2.0",
-        "react-router": "7.9.2",
-        "tailwindcss-rtl": "0.9.0",
+        "@reduxjs/toolkit": "latest",
+        "@tailwindcss/vite": "latest",
+        "motion": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "react-icons": "latest",
+        "react-redux": "latest",
+        "react-router": "latest",
+        "tailwindcss-rtl": "latest",
       },
       "devDependencies": {
-        "@eslint/js": "9.36.0",
-        "@testing-library/react": "16.3.0",
-        "@types/react": "19.1.13",
-        "@types/react-dom": "19.1.9",
-        "@vitejs/plugin-react-swc": "4.1.0",
-        "daisyui": "5.1.23",
-        "eslint": "9.36.0",
-        "eslint-plugin-react-hooks": "5.2.0",
-        "eslint-plugin-react-refresh": "0.4.22",
-        "globals": "16.4.0",
-        "jsdom": "27.0.0",
-        "prettier": "3.6.2",
-        "typescript": "5.9.2",
-        "typescript-eslint": "8.44.1",
-        "vite": "7.1.7",
-        "vite-plugin-pwa": "1.0.3",
-        "vitest": "3.2.4",
+        "@eslint/js": "latest",
+        "@testing-library/react": "latest",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "@vitejs/plugin-react-swc": "latest",
+        "daisyui": "latest",
+        "eslint": "latest",
+        "eslint-plugin-react-hooks": "latest",
+        "eslint-plugin-react-refresh": "latest",
+        "globals": "latest",
+        "jsdom": "latest",
+        "prettier": "latest",
+        "typescript": "latest",
+        "typescript-eslint": "latest",
+        "vite": "latest",
+        "vite-plugin-pwa": "latest",
+        "vitest": "latest",
       },
     },
   },
@@ -464,7 +464,7 @@
 
     "@types/json-schema": ["@types/json-schema@7.0.15", "", {}, "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="],
 
-    "@types/react": ["@types/react@19.1.13", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ=="],
+    "@types/react": ["@types/react@19.1.15", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-+kLxJpaJzXybyDyFXYADyP1cznTO8HSuBpenGlnKOAkH4hyNINiywvXS/tGJhsrGGP/gM185RA3xpjY0Yg4erA=="],
 
     "@types/react-dom": ["@types/react-dom@19.1.9", "", { "peerDependencies": { "@types/react": "^19.0.0" } }, "sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ=="],
 
@@ -604,7 +604,7 @@
 
     "csstype": ["csstype@3.1.3", "", {}, "sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw=="],
 
-    "daisyui": ["daisyui@5.1.23", "", {}, "sha512-HgxmDidqO0FrcrkMVRz7KYwQi+eoZarMVud2kx5cGhTmTlaJPne/gbsSEn4/vM1svbp40ENCMjJsbBldCXhrOA=="],
+    "daisyui": ["daisyui@5.1.25", "", {}, "sha512-LYOGVIzTCCucEFkKmdj0fxbHHPZ83fpkYD7jXYF3/7UwrUu68TtXkIdGtEXadzeqUT361hCe6cj5tBB/7mvszw=="],
 
     "data-urls": ["data-urls@6.0.0", "", { "dependencies": { "whatwg-mimetype": "^4.0.0", "whatwg-url": "^15.0.0" } }, "sha512-BnBS08aLUM+DKamupXs3w2tJJoqU+AkaE/+6vQxi/G/DPmIZFJJp9Dkb1kM03AZx8ADehDUZgsNxju3mPXZYIA=="],
 
@@ -1022,7 +1022,7 @@
 
     "react-redux": ["react-redux@9.2.0", "", { "dependencies": { "@types/use-sync-external-store": "^0.0.6", "use-sync-external-store": "^1.4.0" }, "peerDependencies": { "@types/react": "^18.2.25 || ^19", "react": "^18.0 || ^19", "redux": "^5.0.0" } }, "sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g=="],
 
-    "react-router": ["react-router@7.9.2", "", { "dependencies": { "cookie": "^1.0.1", "set-cookie-parser": "^2.6.0" }, "peerDependencies": { "react": ">=18", "react-dom": ">=18" }, "optionalPeers": ["react-dom"] }, "sha512-i2TPp4dgaqrOqiRGLZmqh2WXmbdFknUyiCRmSKs0hf6fWXkTKg5h56b+9F22NbGRAMxjYfqQnpi63egzD2SuZA=="],
+    "react-router": ["react-router@7.9.3", "", { "dependencies": { "cookie": "^1.0.1", "set-cookie-parser": "^2.6.0" }, "peerDependencies": { "react": ">=18", "react-dom": ">=18" }, "optionalPeers": ["react-dom"] }, "sha512-4o2iWCFIwhI/eYAIL43+cjORXYn/aRQPgtFRRZb3VzoyQ5Uej0Bmqj7437L97N9NJW4wnicSwLOLS+yCXfAPgg=="],
 
     "redux": ["redux@5.0.1", "", {}, "sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w=="],
 
